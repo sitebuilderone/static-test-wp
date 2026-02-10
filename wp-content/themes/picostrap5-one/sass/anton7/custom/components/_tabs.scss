@@ -1,0 +1,17 @@
+//
+//Tabs style
+//
+.nav-inline{
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  ::-webkit-scrollbar {
+    display: none; /* Webkit-based browsers */
+  }
+}
+.indicator,.indicator-vertical{
+    transition: all .3s;
+}

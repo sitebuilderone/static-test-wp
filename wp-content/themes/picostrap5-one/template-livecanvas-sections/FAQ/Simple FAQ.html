@@ -1,0 +1,30 @@
+ <section>
+ 	<div class="container py-5">
+ 		<div class="row">
+ 			<div class="col-md-4">
+ 				<div class="lc-block mb-5 mb-md-0">
+ 					<div editable="rich">
+ 						<h2 class="fw-bolder">Frequently asked questions</h2>
+ 						<p>Find answers to your most common questions.</p>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="col-md-6 offset-md-1">
+ 				<tangible class="live-refresh">
+ 					<loop type="faqs" limit="-1" orderby="meta_value_num" meta_key="faq_order" order="ASC">
+ 						<div class="lc-block mb-4">
+ 							<div>
+ 								<p class="h4">
+ 									<field name="faq_question"></field>
+ 								</p>
+ 								<div>
+ 									<field name="faq_answer"></field>
+ 								</div>
+ 							</div>
+ 						</div>
+ 					</loop>
+ 				</tangible>
+ 			</div>
+ 		</div>
+ 	</div>
+ </section>

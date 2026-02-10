@@ -1,0 +1,27 @@
+// Dark mode style
+.theme-icon-active .material-symbols-rounded{
+    font-family: bootstrap-icons!important;
+    display: inline-block;
+    font-weight: normal;
+  }
+  [data-bs-theme=dark]{
+    .theme-icon-active{
+        .bi::before{
+            content: "\F494";
+        }
+    }
+  }
+  [data-bs-theme=auto]{
+    .theme-icon-active{
+        .bi::before{
+            content: "\F4AF";
+        }
+    }
+  }
+  [data-bs-theme=light]{
+    .theme-icon-active{
+        .bi::before{
+            content: "\F1D2";
+        }
+    }
+  }

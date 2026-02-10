@@ -1,0 +1,244 @@
+<section item-type="svg-icon">
+    <h1>SVG Icon</h1>
+    <form class="add-common-form-elements">
+
+
+
+        <div style="position:relative">
+            <label>Size </label>
+            <div class="size-feedback"></div>
+
+
+            <select name="unit"
+                style="width: 76px;    font-size: 10px;    background: #8C8A8A;    margin: 7px 0 0 3px;">
+                <optgroup label="Sizing Strategy">
+                    <option value="em">Fixed Width and Height in "em"</option>
+                    <option value="rws">Responsive via .rws-x utility classes </option>
+                </optgroup>
+            </select>
+
+
+
+            <input value="8" type="range" name="size" min="1" max="40" step="0.1">
+        </div>
+
+        <div>
+
+            <!-- <label>Color</label> <div class="custom-color-widget custom-color-widget-text-color" get_content_from="#custom-color-widget-model"></div> -->
+            <div build_widget_for="color"></div>
+
+        </div>
+
+        <div>
+
+            <!-- <label>Background Color</label> <div class="custom-color-widget custom-color-widget-bg-color" get_content_from="#custom-bg-color-widget-model"></div> -->
+            <div build_widget_for="background-color"></div>
+        </div>
+
+        <div>
+            <h3>Margin</h3>
+            <div class="widget-wrapper-flex" get_content_from="#the-margins">
+            </div>
+            <div>
+                <h3>Padding</h3>
+                <select class="form-control" target="classes">
+                    <option value="">None</option>
+                    <option value="p-1">1</option>
+                    <option value="p-2">2</option>
+                    <option value="p-3">3</option>
+                    <option value="p-4">4</option>
+                    <option value="p-5">5</option>
+                    <option value="p-6">6</option>
+                    <option value="p-7">7</option>
+                    <option value="p-8">8</option>
+                </select>
+            </div>
+            <div>
+                <label>Shadow</label>
+                <select class="form-control" name="vertical_padding_classes" target="classes">
+                    <option value="">No shadow</option>
+                    <option value="shadow-sm">Small shadow</option>
+                    <option value="shadow">Regular shadow</option>
+                    <option value="shadow-lg">Larger shadow</option>
+                </select>
+            </div>
+            <div>
+                <label>Border-radius</label>
+                <select class="form-control" name="border_radius_classes" target="classes">
+                    <option value="">Standard</option>
+                    <option value="rounded-circle">rounded-circle</option>
+                    <option value="rounded">rounded</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Linked URL (optional)</label>
+                <input class="zoomable link-target-url" type="text" value="" placeholder="https://www.mysite.com">
+            </div>
+
+            <div>
+                <label>Icon set </label>
+
+                <select class="form-control" name="iconset">
+
+                    <option value="bs">Bootstrap Icons</option>
+                    <option value="fa5-regular">FA 5 Regular </option>
+                    <option value="fa5-solid">FA 5 Solid </option>
+                    <option value="fa5-brands">FA 5 Brands </option>
+                    <option value="mdi">MDI Icons </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="svg-icon-search-tool">
+                <label>Icon Search</label>
+
+                <input type="text" name="icon_search" value="" placeholder="Enter Icon Name">
+                <!-- <button id="vembed-submit-button" type="submit" hidden></button>  -->
+            </div>
+        </div>
+        <div style="padding:0">
+            <div id="lc-svg-icons">
+                <h2>Loading icons...</h2>
+            </div>
+        </div>
+    </form>
+
+</section>
+
+
+<!-- THE JS SIDE OF THE MOON -->
+<script>
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="svg-icon"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+            
+            var icon_width = getAttributeValue(selector , "width");
+            if(icon_width){
+                //em case
+                theSection.find("input[name='size']").val(icon_width.replace("em","")); //set slider
+                theSection.find(".size-feedback").text(icon_width);//set feedback label
+                theSection.find("select[name=unit]").val("em");//set unit select
+            }	else {
+                //.rws case
+                 
+                let theSizingClass = false;
+                theSection.find("select[name=unit]").val("rws");//set unit select
+                for (i = 0; i < 50; i++) if(doc.querySelector(selector).classList.contains("rws-"+i)) theSizingClass = "rws-"+i; 
+                if (theSizingClass) {
+                    theSection.find("input[name='size']").val(theSizingClass.replace("rws-","")); //set slider
+                    theSection.find(".size-feedback").text(theSizingClass);//set feedback label
+                }
+               
+            }
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+
+
+<script>
+////////////////////////////////////////////////////// SVG INLINE ICONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+$(document).ready(function ($) {
+    
+	//ON CHANGE SELECT FOR ICON SET, LOAD NEW ICON SET
+	$("body").on("change", "#sidepanel section[item-type=svg-icon] *[name=iconset]",function(){ 
+		$("#lc-svg-icons").load("?lc_action=load_"+$(this).val()+"_icons", function() {});
+        $('section[item-type=svg-icon] input[name="icon_search"]').val(""); //reset search field
+    });
+     
+	
+    ///CLICK NEW ICON: SUBSTITUTE HTML CONTENT
+    $("#sidepanel").on("click", "#lc-svg-icons svg", function (event) {
+        event.preventDefault();
+        var theSection=$(this).closest("section[selector]");
+        var selector=theSection.attr("selector");
+		var chosen_icon_outerhtml = $(this)[0].outerHTML;
+        //save width and height of old element and the classes
+		var theWidth= doc.querySelector(selector).getAttribute("width");
+        var theHeight= doc.querySelector(selector).getAttribute("height");
+        var theClasses = doc.querySelector(selector).className.baseVal;
+		//apply the new chosen icon
+		setPageHTMLOuter(selector, chosen_icon_outerhtml);
+		//restore width, height attributes and classes
+		if (theWidth) doc.querySelector(selector).setAttribute("width",theWidth); else doc.querySelector(selector).removeAttribute("width");
+		if (theHeight) doc.querySelector(selector).setAttribute("height",theHeight); else doc.querySelector(selector).removeAttribute("height");
+		if (theClasses) doc.querySelector(selector).className.baseVal=theClasses; else doc.querySelector(selector).removeAttribute('class'); 
+        //if($("#sidepanel section[item-type=svg-icon] *[name=iconset]").val()!='bs')	
+        doc.querySelector(selector).setAttribute("lc-helper","svg-icon");
+		doc.querySelector(selector).setAttribute("fill","currentColor"); //useful for enabling color classes to work
+		updatePreviewSectorial(selector);
+    });
+	
+    //USER DRAGS SIZE SLIDER
+    $('#sidepanel').on('input', 'section[item-type=svg-icon] input[name=size]', function (event) {    
+        event.preventDefault();
+		var theSection=$(this).closest("section[selector]");
+		var selector=$(this).closest("section[selector]").attr("selector");
+		var unit=theSection.find("select[name=unit]").val();//alert(unit);
+		if(unit==="rws") {
+			//resize using rws- utility classes 
+            theSection.find(".size-feedback").text(".rws-" + parseInt($(this).val()));
+			doc.querySelector(selector).removeAttribute("width");
+			doc.querySelector(selector).removeAttribute("height");
+			for (i = 0; i < 50; i++) doc.querySelector(selector).classList.remove("rws-"+i);	
+            doc.querySelector(selector).classList.add("rws-" + parseInt($(this).val()));
+			theSection.find(".common-form-fields input[attribute-name=class]").val(doc.querySelector(selector).getAttribute("class"));
+			
+		} else {
+			//resize using an unit value, eg "em"
+			var icon_size=$(this).val()+unit;
+			theSection.find(".size-feedback").text(icon_size);
+			doc.querySelector(selector).setAttribute("width",icon_size);
+			doc.querySelector(selector).setAttribute("height",icon_size);
+			for (i = 0; i < 50; i++) doc.querySelector(selector).classList.remove("rws-"+i);
+			theSection.find(".common-form-fields input[attribute-name=class]").val(doc.querySelector(selector).getAttribute("class"));
+		}
+		
+		updatePreviewSectorial(selector);
+	});
+	
+    // USER SEARCH FOR ICONS
+    $('section[item-type=svg-icon] input[name="icon_search"]').on('keyup',function() {
+        var theSection=$(this).closest("section[selector]");
+        var search = $(this).val();
+        if (search==="") theSection.find("#lc-svg-icons svg").show();  
+        theSection.find('#lc-svg-icons svg').each(function(k,v) {
+            if($(v).attr('class').indexOf(search.toLowerCase()) < 0)  $(v).hide(); else $(v).show();
+        });
+    });
+    
+});
+	
+</script>

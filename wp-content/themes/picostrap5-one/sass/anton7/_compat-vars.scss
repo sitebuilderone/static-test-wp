@@ -1,0 +1,4 @@
+// Gradient fallbacks that depend on Anton7 variables
+$bg-gradient-blur-dark:  $bg-gradient-dark !default;
+$bg-gradient-tint-dark:  $bg-gradient-light !default;
+$bg-gradient-light-dark: $bg-gradient-light !default; // <-- new fallback

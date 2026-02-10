@@ -1,0 +1,31 @@
+
+<div id="tree-context-menu" class="lc-context-menu">
+    <div data-tree-item-action="edit-properties"><span class="fa fa-cog"></span> Edit Properties...</div>
+    <div data-tree-item-action="edit-html"><span class="fa fa-code"></span> HTML Editor...</div>
+    <div data-tree-item-action="ai-assistant"><span class="fa fa-magic"></span> AI Assistant...</div>
+    <div data-tree-item-action="replace-section" ><span class="fa fa-sign-in"></span> Replace Content with Section / Grid...</a></div>
+    <div data-tree-item-action="replace-block"  ><span class="fa fa-sign-in"></span> Replace Content with Block...</a></div>
+    <div data-tree-item-action="save-to-library"><span class="fa fa-floppy-o"></span> Save to Library...</a></div>
+
+    <div data-tree-item-action="copy-content"><span class="fa fa-copy"></span> Copy Content</div>
+    <div data-tree-item-action="paste-content"><span class="fa fa-paste"></span> Paste Content</div>
+    <div data-tree-item-action="duplicate-item"><span class="fa fa-files-o"></span> Duplicate</div>
+    <div data-tree-item-action="delete-item"><span class="fa fa-trash"></span> Delete</div>
+    <hr>
+    <div data-tree-item-action="move-up"><span class="fa fa-arrow-up"></span> Move Up</div>
+    <div data-tree-item-action="move-down"><span class="fa fa-arrow-down"></span> Move Down</div>
+</div>
+
+
+<template id="tree-view-window-content-template">
+    
+    <div id="tree-head">
+        <span>Right-click to interact or drag & drop items</span>
+        <span>
+            <a href="#" id="tree-expand-all">Expand All</a>
+            <a href="#" id="tree-collapse-all">Collapse All</a>
+        </span>
+    </div>
+    <div id='tree-body'></div>
+
+</template>

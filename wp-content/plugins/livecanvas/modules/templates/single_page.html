@@ -1,0 +1,46 @@
+<tangible>
+    <!-- featured image -->
+    <if field="image">
+        
+        <img src="{Field image_url}" 
+            srcset="{Field image_srcset}" 
+            sizes="{Field image_sizes}" 
+            class="w-100 min-vh-25 min-vh-md-50 mb-n7"
+            style="max-height: 400px; object-fit: cover;"
+            alt="{Field image_alt}" >
+
+        <else>
+            <img src="https://placehold.co/600x400?text=Placeholder" class="w-100 min-vh-25 min-vh-md-50 mb-n7"
+                style="max-height: 400px; object-fit: cover;">
+        </else>
+        
+    </if>
+
+    <!-- start main template container -->
+    <div id="container-content-page" class="container p-5 bg-light mt-md-n6 position-relative rounded">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <!-- the title -->
+                <div class="lc-block">
+                    <h1 class="display-4 fw-bold">
+                        <field name="title" />
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="lc-block">
+                    <!-- content -->
+                    <field name="content" />
+                </div>
+
+                <div class="lc-block"> 
+                    [lc_edit_post_link text="Edit this page" class='d-block mt-4 mb-5']
+                </div>
+
+            </div>
+        </div>
+    </div>
+</tangible>

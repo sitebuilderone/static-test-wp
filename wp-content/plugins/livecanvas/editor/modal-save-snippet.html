@@ -1,0 +1,130 @@
+<!-- Modal content -->
+<div class="lc-modal-header">
+    <span class="lc-modal-close">&times;</span>
+</div>
+<div class="lc-modal-content">
+
+    <h1 style="color: aliceblue; text-align: center;margin-top: 0;">Save Code Snippet</h1>
+
+    <form id="lc-modal-save-snippet-form">
+
+        <label for="save-snippet-name" style="margin-top:20px">Choose a name</label>
+        <input id="save-snippet-name" name="save-snippet-name" type="text" placeholder="My Snippet"
+            style="font-size:20px;">
+
+        <fieldset style="color: cornflowerblue;">
+            <legend>Save as:</legend>
+
+            <div>
+                <!-- <strong>Database</strong> -->
+                <div>
+                    <label><input type="radio" name="save-location" value="lc_partial">
+                        <b>Partial</b> – HTML fragments you want to include more than once through your site. 
+                        <small><a  href="WPADMINURL/edit.php?post_type=lc_partial" target="_blank">Partials Archive...</a></small>
+                    </label>
+                </div>
+
+                <div>
+                    <label><input type="radio" name="save-location" value="lc_section">
+                        <b>Section</b> – Larger HTML fragments to use as "starters" in the editor. 
+                        <small><a href="WPADMINURL/edit.php?post_type=lc_section" target="_blank">Sections Archive...</a></small>
+                    </label>
+                </div>
+
+                <div>
+                    <label><input type="radio" name="save-location" value="lc_block">
+                        <b>Block</b> – Small, atomic HTML fragments to use as "atomic starters" in the editor. 
+                        <small><a   href="WPADMINURL/edit.php?post_type=lc_block" target="_blank">Blocks Archive...</a></small>
+                    </label>
+                </div>
+            </div>
+
+            <div hidden style="margin-top: 1rem;">
+                <strong>Local Files</strong>
+                <label><input type="radio" name="save-location" value="local">
+                    Save to a local file on your system.
+                </label>
+            </div>
+        </fieldset>
+
+        
+        <div id="button_action_modal">
+            <button type="button" id="btn-modal-close" class="lc-modal-close">Cancel</button>
+            <button type="submit" id="save-snippet-submit" class="lc-modal-save-snippet-submit">Save Snippet</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+         
+        // Handle form submission
+        $('#lc-modal-save-snippet-form').on('submit', function (e) {
+            e.preventDefault();
+
+            const snippetName = $('#save-snippet-name').val();
+            const saveLocation = $('input[name="save-location"]:checked').val();
+            const selector = $('#lc-modal-save-snippet').attr("selector");
+            const html = doc.querySelector(selector)?.outerHTML;
+
+            if (!saveLocation) {
+                return swal({ title: "Please select where to save the snippet.", icon: "warning" });
+            }
+
+            if (!snippetName) {
+                return swal({ title: "Please enter snippet name.", icon: "warning" });
+            }
+
+            $("#previewiframe").contents().find(".lc-content-is-being-edited").blur();
+
+            $.post(lc_editor_saving_url, {
+                action: 'lc_save_element',
+                security: lc_editor_saving_nonce,
+                post_type: saveLocation,
+                post_title: snippetName,
+                post_content: '\n' + html_beautify(html, {
+                    unformatted: ['script', 'style'],
+                    indent_size: 1,
+                    indent_char: '\t',
+                }) + '\n',
+                lc_main_save_nonce_field: $("#lc_main_save_nonce_field").val()
+            })
+                .done(function (response) {
+                    if (response.includes("Save")) {
+                        swal({ title: "Added to library", icon: "success" });
+                        $("#lc-modal-save-snippet").fadeOut();
+                    } else {
+                        swal({ title: "Saving error (b)", icon: "warning", text: response });
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    swal({ title: "Saving error", icon: "warning", text: error });
+                });
+        });
+
+        // Handle ESC key and Enter key behavior
+        $(document).on('keydown', function (e) {
+            const tag = e.target.tagName.toLowerCase();
+            const type = $(e.target).attr('type');
+
+            if (e.key === "Escape" || e.keyCode === 27) {
+                e.preventDefault();
+                $("#lc-modal-save-snippet").fadeOut();
+            }
+
+            if (e.key === "Enter" || e.keyCode === 13) {
+                const allowEnter = (tag === 'input' && type === 'text') || tag === 'textarea';
+                if (!allowEnter) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Close modal on cancel or close
+        $('#lc-modal-save-snippet .lc-modal-close').on('click', function(){
+            $("#lc-modal-save-snippet").fadeOut();
+        });
+
+ 
+    });
+</script>

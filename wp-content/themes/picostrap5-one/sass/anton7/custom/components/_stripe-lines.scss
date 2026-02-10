@@ -1,0 +1,24 @@
+//stripes
+.stripes {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index:0;
+    pointer-events: none;
+}
+.stripes-container {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.stripes-item {
+    border-left:1px dashed currentColor;
+    height: 100%;
+    width: 1px;
+    opacity: .175;
+}

@@ -1,0 +1,3 @@
+// no-op versions of Bootstrap's internal asserts
+@mixin _assert-ascending($map, $map-name: "$map") {}
+@mixin _assert-starts-at-zero($map, $map-name: "$map") {}

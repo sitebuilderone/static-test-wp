@@ -1,0 +1,22 @@
+//Breadcrumb
+
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    .breadcrumb-item{
+       + .breadcrumb-item::before{
+        font-family: bootstrap-icons!important;
+        font-size: 10px;
+        float: none;
+        line-height: 1;
+         }
+    }
+}
+.text-white{
+    .breadcrumb-item{
+        color: rgba($white,.65);
+        &::before{
+            color: rgba($white,.5);
+        }
+    }
+}

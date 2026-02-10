@@ -1,0 +1,191 @@
+<section item-type="shortcode">
+    <h1>Shortcode</h1>
+    <form class="add-common-form-elements">
+
+        <div id="shortcode-samples" class="sidepanel-secondary-part" hidden="">
+            <label> Sample Shortodes</label>
+            <select class="form-control" name="shortode_presets">
+                <option>Choose Shortcode...</option>
+                <option value="">new</option>
+            </select>
+
+        </div>
+
+
+
+        <div>
+            <label>Shortcode
+                <i style="float:right;">Update Preview</i>
+
+                <!-- <a style="float:right;text-decoration: underline" onClick="$('#shortcode-samples').slideToggle();">Examples</a> -->
+            </label>
+
+            <!-- <input type="text" name="shortcode_text" value="" class="zoomable" placeholder="Enter Shortcode..."> -->
+            <textarea name="shortcode_text" value="" placeholder="Enter Shortcode..."></textarea>
+
+        </div>
+
+
+
+
+    </form>
+</section>
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="shortcode"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+
+            //populate shortcode field
+            var theShortcode = doc.querySelector(selector).innerHTML.trim();
+            theSection.find("*[name=shortcode_text]").val(theShortcode);
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+
+
+<script>
+$(document).ready(function ($) {
+    
+    //////////////////////////////////////////////////////  SHORTCODES ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     
+    //ONCHANGE OF INPUTS, UPDATE SHORTCODE/////////
+    $("body").on("change", "#sidepanel section[item-type=shortcode] *[name=shortcode_text]",function(e){
+        e.preventDefault();
+        //var theSection=$(this).closest("section[selector]");
+        var selector=$(this).closest("section[selector]").attr("selector");
+
+        doc.querySelector(selector).innerHTML=$(this).val();
+    
+        render_shortcode(selector, getPageHTML(selector)); 
+    });
+    
+    
+    /*********** POSTS LOOP  ******************/
+    
+    //ONCHANGE OF INPUTS, UPDATE SHORTCODE/////////
+    $("body").on("change", "#sidepanel section[item-type=posts-loop] *[name]", function () {
+        var theSection = $(this).closest("section[selector]");
+        var selector = $(this).closest("section[selector]").attr("selector");
+        var theShortcodeElement = doc.querySelector(selector);
+        var theShortcode = theShortcodeElement.innerHTML;
+
+        ///build shortcode parameters:init
+        var shortcode_params = '';
+        theSection.find("*[name]").each(function (index, el) {
+            var fieldValue = jQuery(el).val();
+            var fieldName = jQuery(el).attr("name");
+
+            // DYNAMIC VIEWS: if post loop calls lc_get_posts_dynamic_view, dont add the output settings parameters in the shortcode
+            if ($("#sidepanel section[item-type='posts-loop'] select[name=output_view]").val() == 'lc_get_posts_dynamic_view') {
+                if (fieldName.includes('output') && fieldName != 'output_view' && fieldName != 'output_dynamic_view_id') return; //skip fields if useless
+            }
+
+            // PHP FUNCTION VIEWS: if post loop calls lc_get_posts_mycustom_view, dont add the output settings parameters in the shortcode
+            if ($("#sidepanel section[item-type='posts-loop'] select[name=output_view]").val() == 'lc_get_posts_mycustom_view') {
+                if (fieldName.includes('output') && fieldName != 'output_view') return; //skip fields if useless
+            }
+
+            if (fieldValue === null) fieldValue = lc_get_parameter_value_from_shortcode(fieldName, theShortcode);
+            if (fieldValue != "") shortcode_params += jQuery(el).attr("name") + '="' + fieldValue + '" ';
+        });
+
+        // Check if the shortcode has inner content
+        var innerContent = '';
+        var shortcodeStartTag = '[lc_get_posts ';
+        var shortcodeEndTag = '[/lc_get_posts]';
+        var shortcodeSelfClosingTag = '[lc_get_posts ';
+
+        if (theShortcode.includes(shortcodeEndTag)) {
+            var innerContentStart = theShortcode.indexOf(']') + 1;
+            var innerContentEnd = theShortcode.lastIndexOf(shortcodeEndTag);
+            innerContent = theShortcode.substring(innerContentStart, innerContentEnd);
+        }
+
+        // Update shortcode
+        if (innerContent) {
+            theShortcodeElement.innerHTML = shortcodeStartTag + shortcode_params + ']' + innerContent + shortcodeEndTag;
+        } else {
+            theShortcodeElement.innerHTML = shortcodeSelfClosingTag + shortcode_params + ']';
+        }
+
+        //update live preview
+        //updatePreviewSectorial(selector);
+
+        render_shortcode(selector, getPageHTML(selector));
+    });
+
+    
+
+    //when user changes output view select, hide or show output settings fields
+    $("body").on("change", "#sidepanel section[item-type='posts-loop'] .lc-post-output-tabcontent select[name=output_view]", function () {
+        
+        myConsoleLog("User changed post loop output view");
+
+        const cases = ['lc_get_posts_dynamic_view', 'lc_get_posts_mycustom_view', 'lc_get_posts_theme_loop_view']; //cases where we dont need output parameters
+
+        var secondary_post_output_elements = $("#sidepanel section[item-type='posts-loop'] .lc-post-output-tabcontent div:not(:nth-child(-n+2))");
+
+        if (cases.includes($(this).val())) {
+            secondary_post_output_elements.hide();
+        } else {
+            secondary_post_output_elements.show();
+        }
+
+        if ($(this).val() == 'lc_get_posts_theme_loop_view') {
+            $('.open-dynamic-templates').hide();
+            $('#output_dynamic_view_id_wrap').hide();
+            $('#output_theme_loop_name_wrap').show();
+        } else if ($(this).val() == 'lc_get_posts_dynamic_view') {
+            $('#output_theme_loop_name_wrap').hide();
+            $('.open-dynamic-templates').show();
+            $('#output_dynamic_view_id_wrap').show();
+        } else {
+            $('#output_theme_loop_name_wrap').hide();
+            $('.open-dynamic-templates').hide();
+            $('#output_dynamic_view_id_wrap').hide();
+        }
+    });
+
+    //user clicks link to open dynamic templates screen
+    $("#sidepanel").on("click", ".open-dynamic-templates", function (event) {
+        event.preventDefault();
+        window.open(lc_editor_saving_url.replace('admin-ajax.php', 'edit.php?post_type=lc_dynamic_template'), '_blank').focus();
+
+    });
+    
+     
+
+}); //end doc ready
+
+</script>

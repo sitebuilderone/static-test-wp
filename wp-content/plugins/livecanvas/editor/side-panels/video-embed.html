@@ -1,0 +1,166 @@
+<section item-type="video-embed">
+    <h1>Embed iframe / video</h1>
+    <form class="add-common-form-elements">
+
+        <div id="embed-samples" class="sidepanel-secondary-part" hidden>
+
+            <label> Sample Embeds</label>
+            <select class="form-control" name="embed_presets">
+                <option>Choose Embed...</option>
+                <option value="https://www.youtube.com/watch?v=HLKQD6GoKNU">YouTube</option>
+                <option value="https://vimeo.com/40173621">Vimeo</option>
+                <option value="https://soundcloud.com/traxsource/live-208-feat-cody-currie">SoundCloud</option>
+                <option value="https://www.mixcloud.com/getatjeff/summertime-mixtape-vol-9/">MixCloud</option>
+
+            </select>
+
+        </div>
+
+        <div>
+            <label> Embed Source </label>
+
+            <input class="zoomable" type="text" name="src_url" value="" placeholder="Youtube / Vimeo page URL">
+            <!-- <button id="vembed-submit-button" type="submit" hidden></button>  -->
+        </div>
+
+        <div>
+            <label> Iframe Src URL </label>
+
+            <input class="zoomable" type="text" name="iframe_src" value="" placeholder="Iframe content URL">
+            <!-- <button id="vembed-submit-button" type="submit" hidden></button>  -->
+        </div>
+
+        <div>
+            <label>Lazy Loading</label>
+            <select class="form-control" attribute-name="loading" inner-selector="iframe">
+                <option value=""></option>
+                <option value="lazy">Lazy (YES)</option>
+                <option value="eager">Eager (NO)</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Aspect ratio </label>
+            <select class="form-control" name="video_format_classes" target="classes">
+                <optgroup framework="bootstrap-5" label="BS5">
+                    <option value="ratio-21x9">21 by 9</option>
+                    <option value="ratio-16x9">16 by 9</option>
+                    <option value="ratio-4x3">4 by 3</option>
+                    <option value="ratio-1x1">1 by 1</option>
+                </optgroup>
+
+                <optgroup framework="bootstrap-4" label="BS4">
+                    <option value="embed-responsive-21by9">21 by 9</option>
+                    <option value="embed-responsive-16by9">16 by 9</option>
+                    <option value="embed-responsive-4by3">4 by 3</option>
+                    <option value="embed-responsive-1by1">1 by 1</option>
+                </optgroup>
+            </select>
+        </div>
+        <!--
+	   	<div>
+            <label>LOADING</label>
+			<select class="form-control"  attribute-name="loading" name="image_loading" >
+						<option value=""></option>
+						<option value="lazy">Lazy</option>
+						<option value="eager">Eager</option>
+			</select>
+        </div>
+	   -->
+    </form>
+</section>
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="video-embed"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+
+            var iframe_url = getAttributeValue(selector + " iframe", "src");
+		    theSection.find("input[name='iframe_src']").val(iframe_url);
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+
+<script>
+
+
+/////////////////////////////////////////////////////  EMBED / VIDEO ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function ($) {    
+    $("body").on("change",'section[item-type=video-embed] form input[name=src_url]',function(){
+        //OEMBED
+        //$("#previewiframe").addClass("lc-block-pointer-events");
+        $.post(
+				lc_editor_saving_url, 
+				{
+					'action': 'lc_process_oembed',
+                    'security': lc_editor_saving_nonce,
+                    'src_url': $(this).val(),
+					//'lc_main_save_nonce_field': $("#lc_main_save_nonce_field").val(),
+				}, 
+				function(response) {
+					//myConsoleLog('The server responded: ', response);
+					if (true) {
+                        //success
+                        //$("#previewiframe").removeClass("lc-block-pointer-events");
+                        var selector=$("section[item-type=video-embed] form").closest("section").attr("selector");
+                        if (response==="") {swal("Wrong URL. Please use the straight video page URL"); return;}
+                        
+                        //setAttributeValue(selector+" iframe","src",response);
+                        $('section[item-type=video-embed] form input[name=iframe_src]').val(response).change();
+
+                        updatePreviewSectorial(selector);		
+					}
+                    $('section[item-type=video-embed] form input[name=src_url]').val("");
+				
+				}
+		);
+        
+    }); //end on change
+
+	//iframe src field change
+    $("body").on("change",'section[item-type=video-embed] form input[name=iframe_src]',function(){
+		event.preventDefault(); 
+        var selector=$(this).closest("section[selector]").attr("selector"); 
+        setAttributeValue(selector+" iframe","src", ($(this).val()));
+        updatePreviewSectorial(selector);
+    }); //end on change
+    
+    //embed_presets
+    //ON INPUT CHANGE, update HTML
+    $('#sidepanel').on('change', 'section[item-type=video-embed] select[name=embed_presets]', function (event) {    
+        event.preventDefault();
+        $(this).closest("section[selector]").find("input[name=src_url]").val($(this).val()).change();
+	}); //end function
+
+}); //end doc ready 
+</script>
+

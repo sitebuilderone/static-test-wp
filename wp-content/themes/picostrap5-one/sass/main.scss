@@ -1,0 +1,28 @@
+// 0) Anton7 stubs/fallbacks FIRST (safe)
+@import "anton7/compat";
+
+// 0.1) Anton7 variables
+@import "anton7/custom/variables/variables";
+
+// 0.2) Anton7 variable-dependent fallbacks
+@import "anton7/compat-vars";
+
+// 1) Bootstrap via Picostrap
+@import "bootstrap-loader";
+
+// 2) Picostrap theme bits...
+@import "wp_basic_styles";
+@import "picostrap";
+@import "woocommerce";
+
+// 3) Anton7 post-Bootstrap layers
+@import "anton7/custom/utilities/root";
+@import "anton7/custom/mixins/transition";
+@import "anton7/custom/utilities/typography";
+@import "anton7/custom/utilities/animations";
+@import "anton7/custom/utilities/utilities";
+@import "anton7/custom/components/components";
+@import "anton7/custom/utilities/dark-mode";
+
+// 4) Site-level tweaks
+@import "custom";

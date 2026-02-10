@@ -1,0 +1,295 @@
+<section item-type="ai-assistant">
+
+    <div id="ai-assistant-error"></div>
+
+    <h1>AI Assistant</h1>
+
+    <div class="sidepanel-tabs" style="position:relative">
+        <a data-show="the-ai-assistant-form" class="active">
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
+            <span>AI Prompts</span>
+        </a>
+        <a data-show="the-ai-screenshot-form">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                style="width:20px !important;height: 20px !important;margin-bottom:7px" viewBox="0 0 385 369"
+                fill="none">
+                <g clip-path="url(#clip0_2275_15)">
+                    <path
+                        d="M231.884 0V37.6159H59.9369C47.6237 37.6473 37.5663 47.7263 37.535 60.0661V115.768H0V60.0661C0 56.7064 0.281982 53.5037 0.814616 50.2069C3.66577 33.3456 13.3158 18.8079 27.6343 9.51387C37.441 3.23409 48.313 0.0627978 59.9369 0L231.884 0ZM334.807 318.762V369H297.241V318.762H249.398V281.114H297.241V218.913H334.776V281.114H385V318.73H334.807V318.762ZM0 153.384H37.535V258.664C37.5663 267.111 42.2974 274.74 49.7542 278.634L32.5846 312.105C20.1461 305.637 10.4647 295.275 4.8877 282.402C1.62923 274.772 0.0313314 266.954 0 258.696V153.384ZM77.9838 318.762V281.114H211.863V318.73H77.9838V318.762ZM334.776 181.297H297.241V60.0661C297.209 47.7263 287.152 37.6473 274.839 37.6159H269.419V0H274.839C278.191 0 281.387 0.28259 284.677 0.816372C301.502 3.67367 316.008 13.3445 325.282 27.6938C331.549 37.5217 334.713 48.4171 334.776 60.0661V181.297Z"
+                        fill="url(#paint0_linear_2275_15)"></path>
+                </g>
+                <defs>
+                    <linearGradient id="paint0_linear_2275_15" x1="33.5" y1="6.99999" x2="278" y2="265"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="var(--color1)"></stop>
+                        <stop offset="1" stop-color="var(--color2)"></stop>
+                    </linearGradient>
+                    <clipPath id="clip0_2275_15">
+                        <rect width="385" height="369" fill="white"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+            <span style="font-size:11px;letter-spacing: -0.2px;">Screenshot to Code</span>
+        </a>
+    </div>
+
+
+    <form id="the-ai-assistant-form" style="padding: 0px 9px 0 9px;">
+
+        <div>
+            <label> Model <small> </small></label>
+            <select class="form-control" name="ai_assistant__choose_model">
+
+                <optgroup label="OpenAI">
+                    <option value="gpt-5.2">GPT-5.2</option>
+                    <option value="gpt-5.2-pro">GPT-5.2 Pro</option>
+                    <option value="gpt-5.1">GPT-5.1</option>
+                    <option value="gpt-5.1-codex">GPT-5.1 Codex - A version of GPT-5.1 optimized for agentic coding in Codex.</option>
+                    <option value="gpt-5.1-codex-mini">GPT-5.1 Codex mini-  Smaller, more cost-effective, less-capable version of GPT-5.1-Codex</option>
+                    <option value="gpt-5-mini">GPT-5 Mini (Cost-efficient version)</option>
+                    <option value="gpt-5-nano">GPT-5 Nano (Fast & Cheap)</option>
+                    <option value="gpt-5">GPT-5 (Best for complex coding)</option>
+                    <option value="gpt-4.1-mini">GPT-4.1 mini (Smaller, faster version of GPT-4.1)</option>
+                    <option value="gpt-4.1-nano">GPT-4.1 nano (Fastest, most cost-efficient)</option>
+                    <option value="gpt-4.1">GPT-4.1 (Smartest non-reasoning model)</option>
+                    <option value="gpt-4o-mini">GPT 4o mini</option>
+                    <option value="gpt-4o">GPT 4o (versatile coder)</option>
+                    <option value="o4-mini">o4 mini (fast small coder)</option>
+                    <option value="o3-mini">o3 mini (small reasoning coder)</option>
+                </optgroup>
+
+
+                <optgroup label="OpenRouter">
+                    <option selected value="anthropic/claude-opus-4.5">Anthropic Claude Opus 4.5</option>
+                    <option value="anthropic/claude-sonnet-4.5">Anthropic: Claude Sonnet 4.5</option> 
+                    <option value="anthropic/claude-sonnet-4">Anthropic Claude Sonnet 4</option> 
+                    <option value="anthropic/claude-3.7-sonnet">Anthropic Claude 3.7 Sonnet</option>  
+                    <option disabled="disabled">Google</option>
+                    <option value="google/gemini-3-pro-preview">Google: Gemini 3 Pro Preview</option>
+                    <option value="google/gemini-3-flash-preview">Google: Gemini 3 Flash Preview</option>
+                    <option value="google/gemini-2.5-flash">Google: Gemini 2.5 Flash</option>
+                    <option value="google/gemini-2.5-flash-lite">Google: Gemini 2.5 Flash Lite</option>
+                    <option value="google/gemini-2.5-pro">Google: Gemini 2.5 Pro</option>
+                    <option disabled="disabled">OpenAI</option>
+                    <option value="openai/gpt-5.2">GPT-5.2</option>
+                    <option value="openai/gpt-5.2-pro">GPT-5.2 Pro (Very Expensive - Coding and long context performance - )</option>
+                    <option value="openai/gpt-5.1">GPT-5.1</option>
+                    <option value="openai/gpt-5.1-codex-max">GPT-5.1 Codex Max</option>
+                    <option value="openai/gpt-5.1-codex">GPT-5.1 Codex - A version of GPT-5.1 optimized for agentic coding in Codex.</option>
+                    <option value="openai/gpt-5.1-codex-mini">GPT-5.1 Codex mini - Smaller, more cost-effective, less-capable version of GPT-5.1-Codex</option>
+                    <option value="openai/gpt-5-mini">GPT-5 Mini</option>
+                    <option value="openai/gpt-5-nano">GPT-5 Nano</option>
+                    <option value="openai/gpt-5">GPT-5</option>
+                    <option value="openai/gpt-4.1-mini">GPT-4.1 Mini</option>
+                    <option value="openai/gpt-4.1-nano">GPT-4.1 Nano</option>
+                    <option value="openai/gpt-4.1">GPT-4.1</option>
+                    <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+                    <option value="openai/gpt-4o">GPT-4o</option>
+                    <option disabled="disabled">Other models</option>
+                    <option value="deepseek/deepseek-chat-v3.1">DeepSeek: DeepSeek V3.1</option>
+                    <option value="qwen/qwen3-coder">Qwen: Qwen3 Coder</option>
+                    <option value="x-ai/grok-code-fast-1">xAI: Grok Code Fast 1</option>
+                    <option value="x-ai/grok-4.1-fast">xAI: Grok 4.1 Fast</option>
+                    <option value="meta-llama/llama-4-maverick">Meta: Llama 4 Maverick</option>                
+                    <option disabled="disabled">Free Models</option>
+                    <option value="deepseek/deepseek-r1-0528:free">DeepSeek: R1 0528 (free)</option> 
+                    <option value="deepseek/deepseek-chat-v3-0324:free">DeepSeek: DeepSeek V3 0324 (free)</option>
+                    <option value="qwen/qwen3-coder:free">Qwen: Qwen3 Coder (free)</option>
+                    <option value="meta-llama/llama-4-maverick:free">Meta: Llama 4 Maverick (free)</option> 
+                </optgroup>
+
+
+            </select>
+        </div>
+
+        <div>
+            <label> Readymade Prompts </label>
+            <select class="form-control" name="ai_assistant_choose_prompt">
+                <option selected>Choose Prompt...</option>
+
+                <optgroup label="Text Editing">
+                    <option>Correct Spelling and Grammar</option>
+                    <option>Use fewer words</option>
+                    <option>Use more words</option>
+                    <option>Rewrite this text to be clearer</option>
+                    <option>Make the text more persuasive</option>
+                    <option>Improve the clarity of the text</option>
+                    <option>Enhance the emotional impact of the text</option>
+                    <option>Change the writing style to active voice</option>
+                    <option>Convert the text to passive voice</option>
+                    <option>Optimize the text for SEO</option>
+                    <option>Remove redundant phrases</option>
+                    <option>Add relevant keywords</option>
+                    <option>Reformat the text into bullet points</option>
+                    <option>Summarize the text</option>
+                </optgroup>
+
+                <optgroup label="Tone Modification">
+                    <option>Change tone to casual</option>
+                    <option>Change tone to professional</option>
+                    <option>Change tone to formal</option>
+                    <option>Change tone to friendly</option>
+                    <option>Change tone to authoritative</option>
+                    <option>Change tone to humorous</option>
+                    <option>Change tone to empathetic</option>
+                    <option>Change tone to urgent</option>
+                </optgroup>
+
+                <optgroup label="Translation">
+                    <option>Translate to German</option>
+                    <option>Translate to Spanish</option>
+                    <option>Translate to Portuguese</option>
+                    <option>Translate to Italian</option>
+                    <option>Translate to English</option>
+                    <option>Translate to French</option>
+                    <option>Translate to Chinese</option>
+                    <option>Translate to Japanese</option>
+                    <option>Translate to Russian</option>
+                    <option>Translate to Arabic</option>
+                </optgroup>
+
+                <optgroup label="Text Creation">
+                    <option>Create a short sentence about company</option>
+                    <option>Generate a product description your company</option>
+                    <option>Create a marketing slogan for your company</option>
+                    <option>Develop an email newsletter for a travel agency</option>
+                    <option>Write a social media post promoting a new app</option>
+                    <option>Create a press release for a product launch</option>
+                    <option>Generate a short story about time travel</option>
+                    <option>Write an introduction for a research paper on AI</option>
+                    <option>Draft a speech for a corporate event</option>
+                    <option>Compose a thank-you note for customers</option>
+                    <option>Develop content for an "About Us" page</option>
+                </optgroup>
+
+            </select>
+        </div>
+
+        <div>
+            <label>Contexts to include</label>
+            <div style="margin: 12px 0 10px 0; line-height: 24px;">
+                <input class="custom-checkbox" type="checkbox" checked id="ai-context-website-info"
+                    name="ai-context-website-info">
+                <label class="ai-label" for="ai-context-website-info">Website Information &nbsp;
+                    <small>
+                        <a target="_blank" href="WPADMINURL/admin.php?page=livecanvas_integration" style="text-decoration: none;"> Edit
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                    </small>
+                </label>
+            </div>
+
+            <div style="line-height: 24px;">
+                <input class="custom-checkbox" type="checkbox" id="ai-context-page-text" name="ai-context-page-text" />
+                <label class="ai-label" for="ai-context-page-text">Page Text</label>
+            </div>
+
+        </div>
+
+        <div>
+            <label>Prompt <a href="#" class="open-prompt-history" style="float: right"> Prompt History</a></label>
+            <textarea name="ai-user-prompt" style="min-height:200px; margin-bottom:10px; word-break: break-word;"></textarea>
+        </div>
+
+        <div style="display: grid; gap:12px;margin-bottom:50px">
+            <input class="button-custom button-go" type="submit" name="ai-assistant-submit" value="Go ask AI">
+            <input class="button-custom button-undo" type="button" name="ai-assistant-reject" value="Undo" disabled>
+            &nbsp;
+        </div>
+    </form>
+
+
+    <!-- a form with a text area and an image upload -->
+    <form hidden id="the-ai-screenshot-form" style="padding: 0px 9px 0 9px;">
+
+        <div>
+            <label>Model <small></small></label>
+            <select class="form-control" name="ai_screenshot__choose_model">
+                <optgroup label="OpenAI">
+                    <option value="gpt-5.2">GPT-5.2</option>
+                    <option value="gpt-5.2-pro">GPT-5.2 Pro</option>
+                    <option value="gpt-5.1">GPT-5.1</option>
+                    <option value="gpt-5.1-codex">GPT-5.1 Codex - A version of GPT-5.1 optimized for agentic coding in Codex.</option>
+                    <option value="gpt-5.1-codex-mini">GPT-5.1 Codex mini - Smaller, more cost-effective, less-capable version of GPT-5.1-Codex</option>
+                    <option value="gpt-5-mini">GPT-5 Mini (Cost-efficient version)</option>
+                    <option value="gpt-5-nano">GPT-5 Nano (Fast & Cheap)</option>
+                    <option value="gpt-5">GPT-5 (Best for complex coding)</option>
+                    <option value="gpt-4.1-mini">GPT-4.1 mini (Smaller, faster version of GPT-4.1)</option>
+                    <option value="gpt-4.1-nano">GPT-4.1 nano (Fastest, most cost-efficient)</option>
+                    <option value="gpt-4.1">GPT-4.1 (Smartest non-reasoning model)</option>
+                    <option value="gpt-4o-mini">GPT 4o mini</option>
+                    <option value="gpt-4o">GPT 4o</option>
+                    <option value="gpt-4-turbo">GPT 4 Turbo</option>
+                    <option value="gpt-4">GPT 4</option>
+                </optgroup>
+                <optgroup label="OpenRouter">
+                    <option selected value="anthropic/claude-opus-4.5">Anthropic Claude Opus 4.5</option>
+                    <option value="anthropic/claude-sonnet-4.5">Anthropic: Claude Sonnet 4.5</option> 
+                    <option value="anthropic/claude-sonnet-4">Anthropic Claude Sonnet 4</option> 
+                    <option value="anthropic/claude-3.7-sonnet">Anthropic Claude 3.7 Sonnet</option>
+                    <option disabled="disabled">--- Google ---</option>
+                    <option value="google/gemini-3-pro-preview">Gemini 3 Pro Preview</option>
+                    <option value="google/gemini-3-flash-preview">Gemini 3 Flash Preview</option>
+                    <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+                    <option value="google/gemini-2.5-flash-lite">Gemini 2.5 Flash Lite</option>
+                    <option value="google/gemini-2.5-pro">Gemini 2.5 Pro</option>
+                    <option disabled="disabled">--- OpenAI ---</option>
+                    <option value="openai/gpt-5.2">GPT-5.2</option>
+                    <option value="openai/gpt-5.2-pro">GPT-5.2 Pro (Very Expensive - Coding and long context performance - )</option>
+                    <option value="openai/gpt-5.1">GPT-5.1</option>
+                    <option value="openai/gpt-5.1-codex">GPT-5.1 Codex - A version of GPT-5.1 optimized for agentic coding in Codex.</option>
+                    <option value="openai/gpt-5.1-codex-mini">GPT-5.1 Codex mini - Smaller, more cost-effective, less-capable version of GPT-5.1-Codex</option>
+                    <option value="openai/gpt-5-mini">GPT-5 Mini</option>
+                    <option value="openai/gpt-5-nano">GPT-5 Nano</option>
+                    <option value="openai/gpt-5">GPT-5</option>
+                    <option value="openai/gpt-4.1-mini">GPT-4.1 Mini</option>
+                    <option value="openai/gpt-4.1-nano">GPT-4.1 Nano</option>
+                    <option value="openai/gpt-4.1">GPT-4.1</option>
+                    <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+                    <option value="openai/gpt-4o">GPT-4o</option>        
+                </optgroup>
+            </select>
+        </div>
+
+        <div id="file-upload-container">
+            <label>Upload a screenshot</label>
+            <input id="file-input" type="file" name="ai-screenshot" accept="image/*" /*
+                DATA-DISABLE-onchange="handleFiles(this.files)">
+
+            <template> <!-- TO DISABLE TEMPOR -->
+                <!-- Drop zone -->
+                <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                    <div style="display: flex; flex-direction: column;gap: 4px;align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                        </svg>
+
+                        <p>Drag image file <b>here</b></p>
+                    </div>
+                </div>
+
+                <!-- Preview image container -->
+                <div id="preview-container">
+                    <img id="image-preview" style="display: none;" />
+                </div>
+
+            </template>
+        </div>
+
+        <div>
+            <label>Add more information <small>(Optional)</small></label>
+            <textarea name="ai-screenshot-prompt" id="ai-screenshot-prompt"
+                style="min-height:100px; margin-bottom:10px; word-break: break-word;"></textarea>
+        </div>
+
+        <div style="display: grid; gap:12px;margin-bottom:50px">
+            <input class="button-custom button-go" type="submit" name="ai-screenshot-submit" value="Convert to Code">
+            <input class="button-custom button-undo" type="button" name="ai-screenshot-reject" value="Undo" disabled>
+            &nbsp;
+        </div>
+    </form>
+
+
+</section>

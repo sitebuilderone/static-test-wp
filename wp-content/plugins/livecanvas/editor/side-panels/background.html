@@ -1,0 +1,89 @@
+<section item-type="background">
+    <h1>Background</h1>
+    <form class="add-common-form-elements">
+
+
+
+
+        <div get_content_from="#image-extras-original" style="padding:0">
+
+        </div>
+
+        <div class="separator"></div>
+        <div>
+            <label style="margin-top:0">Image Preview</label>
+            <div class="preview-image">
+            </div>
+            <div>
+                <label>Background Image URL</label> <!--  attribute-name="src" -->
+                <input type="text" name="background-image" class="zoomable" value="" placeholder="Enter Image URL">
+            </div>
+
+            <div class="imgix-fx">
+                <label>IMGIX Image Effects (UnSplash)</label>
+                <select class="form-control" name="imgix_fx" target="[name=background-image]"
+                    get_content_from="#imgix-fx-original"></select>
+            </div>
+            <!--
+		<div>
+				<label>Text Color</label>
+				<select class="form-control" name="text_color_classes" target="classes" get_content_from="#template_text_color_select"> </select>
+		</div>
+		-->
+
+
+
+
+    </form>
+</section>
+
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="background"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+            var bg_url = "";
+            if (previewFrame.contents().find(selector).css("background-image").match(/"([^']+)"/) != null)
+                bg_url = previewFrame.contents().find(selector).css("background-image").match(/"([^']+)"/)[1];
+            else bg_url = "#";
+            //update image preview    
+            theSection.find(".preview-image").css("background-image", "url(" + bg_url + ")");
+            //update bg url input field
+            theSection.find("input[name=background-image]").val(bg_url).attr("data-old-url", bg_url);
+            //check if imgix widget is appropriate
+            if (bg_url.includes("unsplash.com")) theSection.find(".imgix-fx").show();
+            else theSection.find(".imgix-fx").hide();
+            
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>

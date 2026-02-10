@@ -1,0 +1,218 @@
+<template id="lc-empty-section-template">
+    
+    <section class="lc-empty-section lc-no-selection">
+      <p class="title">New Section</p>
+      <span class="subtitle">
+        Choose an option:
+      </span>
+  
+      <ul>
+        <!-- 1. Readymade Section -->
+        <li>
+          <a class="readymade" href="#">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5z"/>
+              </svg>
+            <span class="action_title">Readymades</span>
+            </span>
+            <span class="action_description">Browse a library of readymade sections or reuse saved ones</span>
+          </a>
+        </li>
+  
+        <!-- 2. Build Grid -->
+        <li>
+          <a class="grid" href="#">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm8.5 0v8H15V2zm0 9v3H15v-3zm-1-9H1v3h6.5zM1 14h6.5V6H1z"/>
+              </svg>
+            <span class="action_title">Grid</span>
+            </span>
+            <span class="action_description">Build the structure that fits best with your needs  </span>
+          </a>
+        </li>
+  
+        <!-- 3. AI Assistant -->
+        <li>
+          <a class="ai" href="#">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M9.5 2.672a.5.5 0 1 0 1 0V.843a.5.5 0 0 0-1 0zm4.5.035A.5.5 0 0 0 13.293 2L12 3.293a.5.5 0 1 0 .707.707zM7.293 4A.5.5 0 1 0 8 3.293L6.707 2A.5.5 0 0 0 6 2.707zm-.621 2.5a.5.5 0 1 0 0-1H4.843a.5.5 0 1 0 0 1zm8.485 0a.5.5 0 1 0 0-1h-1.829a.5.5 0 0 0 0 1zM13.293 10A.5.5 0 1 0 14 9.293L12.707 8a.5.5 0 1 0-.707.707zM9.5 11.157a.5.5 0 0 0 1 0V9.328a.5.5 0 0 0-1 0zm1.854-5.097a.5.5 0 0 0 0-.706l-.708-.708a.5.5 0 0 0-.707 0L8.646 5.94a.5.5 0 0 0 0 .707l.708.708a.5.5 0 0 0 .707 0l1.293-1.293Zm-3 3a.5.5 0 0 0 0-.706l-.708-.708a.5.5 0 0 0-.707 0L.646 13.94a.5.5 0 0 0 0 .707l.708.708a.5.5 0 0 0 .707 0z"/>
+              </svg>
+              <span class="action_title">AI Assistant</span>
+            </span>
+           
+            <span class="action_description">Build from scratch with the AI Assistant using any custom prompt</span>
+          </a>
+        </li>
+  
+        <!-- 4. Clipboard -->
+        <li hidden>
+          <a class="clipboard" href="#">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+              </svg>
+            </svg>
+            <span class="action_title">Paste</span>
+            </span>
+            
+            <span class="action_description">Paste Code from your Clipboard</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  
+    <style>
+  
+      .lc-empty-section {
+        border: 1px dashed #212337;
+        padding: 3rem 0 0;
+        text-align: center;
+        font-family: sans-serif;
+        background-color: #e5e5f7; 
+        background-size: 10px 10px;
+        background-image: repeating-linear-gradient(45deg, #ffffff 0, #21233729 1px, #ffffff 0, #ffffff 50%);
+        user-select: none;
+  
+      }
+  
+      .lc-empty-section .title {
+        color: #212337dd;
+        font-size: 26px;
+        letter-spacing: -0.5px;
+        margin-bottom: 0;
+      }
+  
+      .lc-empty-section .subtitle {
+        display: block;
+        color: #A9ABCB;
+        font-size: 13px;
+        line-height:1.2;
+        max-width: 26rem;
+        margin: 0 auto ;
+        margin-bottom: 1.6rem;
+      }
+  
+      .lc-empty-section ul {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0;
+      }
+  
+      .lc-empty-section ul li {
+        list-style: none;
+        text-align: center;
+        max-width: 130px;
+      }
+  
+      .lc-empty-section ul li a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+      }
+   
+
+      .lc-empty-section ul li span.action_title {
+        margin-top: 4px;
+        text-align: center;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+  
+
+      .lc-empty-section ul li span.action_description {
+        color: #424243;
+        font-size: 12px;
+        text-align: center;
+        visibility: hidden;
+      }
+  
+      .lc-empty-section ul li a .icon {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: center;
+        justify-content: center;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        margin-bottom: 0.75em;
+        transition: transform 0.2s ease;
+        color: white;
+        background-color: #03a9f4;
+      }
+
+      .lc-empty-section ul li a svg {
+        width: 24px;
+        height: 24px;
+      }
+    
+      .lc-empty-section ul li a:hover .icon {
+        transform: scale(1.04);
+        background-color: #e83e8c;
+      }
+
+      .lc-empty-section ul li a:hover .icon .action_title{
+        transform: scale(1.02);
+      }
+  
+      .lc-empty-section ul li a:hover .icon svg{
+        transform: scale(1.02);
+      }
+  
+      .lc-empty-section ul li a:hover span.action_description  {
+        visibility: visible;
+      }
+      
+    </style>
+  </template>
+  
+  <script type="module">
+    const iframe = document.getElementById("previewiframe");
+  
+    iframe.addEventListener("load", () => {
+      const body = iframe.contentDocument.body;
+  
+      body.addEventListener("click", (e) => {
+        const section = e.target.closest("section");
+  
+        // Readymade
+        if (e.target.closest(".lc-empty-section a.readymade")) {
+          e.preventDefault();
+          var selector = CSSelectorForDoc(section);
+          revealSidePanel("sections", selector);
+          $("section[item-type=sections] .sidepanel-tabs a:first").click();
+        }
+
+        // Grid
+        if (e.target.closest(".lc-empty-section a.grid")) {
+          e.preventDefault();
+          var selector = CSSelectorForDoc(section);
+          revealSidePanel("sections", selector);
+          $("section[item-type=sections] .sidepanel-tabs a[data-show=grid-builder]").click();
+        }
+
+        // AI Assistant
+        if (e.target.closest(".lc-empty-section a.ai")) {
+          e.preventDefault();
+          var selector = CSSelectorForDoc(section);
+          revealSidePanel("ai-assistant", selector);
+          localStorage.setItem('backup_outerhtml_before_ai', getPageHTMLOuter(selector));
+        }
+
+        // Clipboard
+        if (e.target.closest(".lc-empty-section a.clipboard")) {
+          e.preventDefault();
+          var selector = CSSelectorForDoc(section);
+          revealSidePanel("clipboard", selector);
+        }
+      });
+    });
+  </script>
+  

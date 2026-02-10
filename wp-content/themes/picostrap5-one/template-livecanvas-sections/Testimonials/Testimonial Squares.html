@@ -1,0 +1,61 @@
+<!-- Testimonial Squares SiteBuilderOne -->
+<section>
+<div class="container py-7">
+<div class="row align-items-center g-xxl-6">
+<div class="col-lg-7 mb-5 mb-md-0">
+<div class="row gx-md-5 gy-5">
+<tangible class="live-refresh">
+<if acf_field="one_testimonials" from="options">
+<loop acf_repeater="one_testimonials" from="options">
+<div class="col-md-6 col-xl-5 align-self-end">
+<div class="lc-block card bg-light border-0 shadow rounded-3">
+<div class="card-body p-4 p-xxl-5">
+<div class="lc-block position-relative">
+<figure>
+<blockquote class="blockquote">
+<p>
+<i class="mb-5">
+<field name="one_testimonial_review">
+</field>
+</i>
+</p>
+</blockquote>
+<figcaption class="blockquote-footer">
+<span class="fw-bold">
+<field name="one_testimonial_name"></field>
+</span>
+<cite title="Source Title">
+<field name="one_testimonial_company"></field>
+</cite>
+</figcaption>
+</figure>
+</div>
+<div class="lc-block position-absolute bottom-0 end-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" fill="currentColor" viewBox="0 0 16 16" lc-helper="svg-icon" style="opacity:0.1">
+<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</loop>
+</if>
+</tangible>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="lc-block mb-3">
+<div editable="rich">
+<h2 class="fw-bold display-6">[sbo_one_testimonial_headline]</h2>
+</div>
+</div>
+<div class="lc-block mb-3">
+<div editable="rich">
+<p class="fw-light rfs-10">[sbo_one_testimonial_content]</p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>

@@ -1,0 +1,175 @@
+<tangible>
+    <!-- featured image -->
+    <if field="image">
+
+        <img src="{Field image_url}" srcset="{Field image_srcset}" sizes="{Field image_sizes}"
+            class="w-100 object-fit-cover min-vh-25 min-vh-md-50 mb-n7" style="max-height: 400px; object-fit: cover;"
+            alt="{Field image_alt}">
+
+        <else> <!-- else cases are not shown in preview -->
+            <img src="https://placehold.co/600x400?text=Placeholder" class="w-100 min-vh-25 min-vh-md-50 mb-n7"
+                style="max-height: 400px;">
+        </else>
+
+    </if>
+    <!-- start main template container -->
+    <div id="container-content-single" class="container p-5 bg-light mt-md-n6 position-relative rounded">
+        <div class="row text-center">
+            <div class="col-md-12 mb-4">
+                <div class="lc-block">
+                    <!-- the title -->
+                    <h1 class="display-4">
+                        <field name="title"></field>
+                    </h1>
+                </div>
+                <div class="lc-block">
+                    <!-- post meta -->
+                    <p class="lead text-muted">
+                        <date locale="{Setting WPLANG}">
+                            <field name="publish_date"> </field>
+                        </date>
+
+                        by
+                        <field name="author_full_name"></field>
+                    </p>
+                </div>
+
+                <!-- categories -->
+                <div class="lc-block mb-2">
+                    <loop type="taxonomy_term" taxonomy="category" post="current">
+                        <a href="{Field url}" class="badge bg-primary rounded-pill link-light text-decoration-none">
+                            <field name="title">
+                            </field>
+                        </a>
+                    </loop>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+
+                <div class="lc-block">
+                    <!-- content -->
+                    <field name="content"></field>
+                </div>
+
+                <div class="lc-block">
+                    <if user_role="" includes="" value="administrator, editor, author">
+                        <a href="{Field edit_url}" class="d-block mt-4 mb-5">
+                            Edit this post
+                        </a>
+                    </if>
+
+                </div>
+
+                <div class="lc-block"> [lc_the_sharing]</div>
+
+                <!-- author box -->
+
+                <div class="lc-block mb-4">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="h3 mb-3" editable="inline">Written by</h2>
+                            <div class="d-grid gap-3 d-md-flex pb-3 mb-3 border-bottom align-items-center">
+
+                                <!-- Author Avatar -->
+                                <if field="author_avatar">
+                                    <img width="72" height="72" src="{Field author_avatar_url size='72'}"
+                                        class="rounded-circle shadow border border-2" alt="{Field author_full_name}">
+                                </if>
+
+                                <div>
+                                    <h5 class="mb-1">
+                                        <field name="author_full_name"></field>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div style="max-height:192px" class="overflow-y-scroll small">
+                                <div class="text-body text-opacity-75">
+                                    <!-- TODO: no new lines, html is not rendered ideally -->
+                                    <field name="author_description" html="true"></field>
+                                </div>
+                            </div>
+                            <div class="author-details mt-4">
+                                <a class="link-primary icon-link icon-link-hover" href="{Field author_archive_url}">
+                                    Read all my posts
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="lc-block mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <template theme="part" name="comments"></template>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="lc-block">
+
+                    <h2 class="mb-3" editable="inline">You may also interested in:</h2>
+
+                    <loop type="post" taxonomy="category" posts="current" category="current" exclude="{Field id}"
+                        count="10" orderby="date" order="desc">
+
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-lg-4">
+                                    <if field="image">
+                                        <img src="{Field image_url size='medium'}"
+                                            class="w-100 rounded-start object-fit-cover h-100" loading="lazy">
+                                        <else>
+                                            <img src="https://placehold.co/600x400?text=Placeholder"
+                                                class="img-fluid rounded-start object-fit-cover h-100" loading="lazy">
+                                        </else>
+                                    </if>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card-body">
+                                        <h3>
+                                            <a href="{Field url}">
+                                                <field name="title"></field>
+                                            </a>
+                                        </h3>
+
+                                        <field name="excerpt" words="30" auto="true"></field>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <if previous_total="" value="0">
+                            <p>No related posts found.</p>
+                        </if>
+                    </loop>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-bottom mb-1">
+            <div class="col-sm-6 py-3 py-md-4">
+                <div class="d-flex align-items-center ">
+                    [lc_the_previous_post_link class="btn btn-link"]
+                </div>
+            </div>
+            <div class="col-sm-6 py-3 py-md-4">
+                <div class="d-flex align-items-center justify-content-end">
+                    [lc_the_next_post_link class="btn btn-link"]
+                </div>
+            </div>
+        </div>
+    </div>
+</tangible>

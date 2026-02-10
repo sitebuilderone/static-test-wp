@@ -1,0 +1,16 @@
+/**
+ * Global styles without parent selector or CSS class prefix
+ */
+
+$class-prefix: "";
+$parent-selector: "";
+
+html {
+  @extend %reset;
+}
+
+body {
+  @extend %body;
+}
+
+@import "index";

@@ -1,0 +1,103 @@
+<!-- LEGACY PANEL - CURRENTLY NO BLOCK WILL OPEN IT
+ 
+COULD BE RESTORED AS USEFUL FOR ICON SETS?
+
+SAMPLE DEMO BLOCK TO LAUNCH PANEL:
+<div class="lc-block">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<div class="text-center display-1">
+		<span class="fa fa-gear" lc-helper="icon"></span>
+	</div>
+</div>
+ 
+-->
+
+<section item-type="icon">
+    <h1>Icon</h1>
+    <form class="add-common-form-elements">
+
+
+        <div hidden>
+            <label>Size</label>
+            <select class="form-control" name="size_classes" target="classes">
+
+                <option value="">Standard</option>
+                <option value="fa-lg">lg</option>
+                <option value="fa-2x">2x</option>
+                <option value="fa-3x">3x</option>
+                <option value="fa-4x">4x</option>
+                <option value="fa-5x">5x</option>
+            </select>
+        </div>
+
+        <div>
+            <!-- <label>Color</label> <div class="custom-color-widget custom-color-widget-text-color" get_content_from="#custom-color-widget-model"> </div> -->
+            <div build_widget_for="color"> </div>
+        </div>
+
+        <div>
+            <label>Linked URL (optional)</label>
+            <input class="zoomable link-target-url" type="text" value="" placeholder="https://www.mysite.com">
+        </div>
+
+        <div>
+            <label>Icon Search</label>
+
+            <input type="text" name="icon_search" value="" placeholder="Enter Icon Name">
+            <!-- <button id="vembed-submit-button" type="submit" hidden></button>  -->
+        </div>
+
+        <div id="lc-fontawesome-icons">
+            <h2>Loading icons...</h2>
+        </div>
+
+    </form>
+
+</section>
+
+ 
+
+
+<script>
+
+////////////////////////////////////////////////////// FA4 LEGACY  ICONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+$(document).ready(function ($) {
+    
+    ///CLICK NEW ICON: SUBSTITUTE CLASS
+    $("#sidepanel").on("click", "#lc-fontawesome-icons i.fa", function (event) {
+        event.preventDefault();
+        var theSection=$(this).closest("section[selector]");
+        
+        //get chosen icon's class name
+        var chosen_icon_class=$(this).removeClass("fa").attr("class");
+        $(this).addClass("fa"); //restore it
+        //alert(chosen_icon_class);
+                 
+        //var selector=$(this).closest("section[selector]").attr("selector");
+        var current_classes= theSection.find("input[attribute-name=class]").val();
+        var class_to_eliminate= (current_classes.match (/(^|\s)fa-[a-z|-]+/g) || []).join(' ');
+        var classes_new=current_classes.replace(class_to_eliminate,'')+" "+chosen_icon_class;
+        //alert(classes_new);
+
+        theSection.find('input[attribute-name=class]').val(classes_new).change();
+    });
+    
+    
+    // USER SEARCH FOR ICONS
+    $('section[item-type=icon] input[name="icon_search"]').on('keyup',function() {
+        var theSection=$(this).closest("section[selector]");
+        var search = $(this).val();
+        if (search==="") theSection.find("#lc-fontawesome-icons h2,#lc-fontawesome-icons ul").show(); else theSection.find("#lc-fontawesome-icons h2,#lc-fontawesome-icons ul").slideUp();
+        theSection.find('#lc-fontawesome-icons .fontawesome-icon-list i.fa').each(function(k,v) {
+            if($(v).attr('class').indexOf(search.toLowerCase()) < 0) {
+                $(v).parent().parent().hide();
+            } else {
+                $(v).parent().parent().show();
+            }
+        });
+    });
+});    
+	
+</script>
+

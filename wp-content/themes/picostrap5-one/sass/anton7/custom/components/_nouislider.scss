@@ -1,0 +1,36 @@
+//
+// No Ui range slider
+//
+.noUi-horizontal {
+    height: 4px;
+  box-shadow:none;
+  border:0px;
+  background-color:var(--#{$prefix}border-color);
+}
+.noUi-connect{
+  background-color:rgba(var(--#{$prefix}body-color),.25);
+}
+.noUi-horizontal .noUi-handle{
+  width:1.5rem;
+  height:1.5rem;
+  right:-.75rem;
+  top:-11px;
+  border-radius:.75rem;
+  border:0px;
+  box-shadow:none;
+  background-color:var(--#{$prefix}primary);
+  border:3px solid var(--#{$prefix}body-bg);
+  transition: all .2s;
+  cursor: pointer;
+  &:before,&:after{
+    display:none;
+  }
+  &:hover{
+      background-color: $primary;
+  }
+}
+.range-slider-selection{
+  padding-top:1.25rem;
+  font-weight:$font-weight-semibold;
+  font-size:$font-size-sm;
+}

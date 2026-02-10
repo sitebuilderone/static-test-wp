@@ -1,0 +1,94 @@
+<tangible>
+    <section class="py-6 bg-light text-center">
+        <loop type="taxonomy_term" taxonomy="category" terms="current">
+
+            <div class="container">
+                <div class="lc-block">
+                    <!-- Archive Title -->
+                    <h1 class="display-4 fw-bold">
+                        <field name="title"></field>
+                    </h1>
+                </div>
+                <div class="lc-block col-lg-8 mx-auto mb-4">
+                    <!-- Archive Description -->
+                    <div class="lead text-muted">
+                        <field name="description"></field>
+                    </div>
+                </div>
+            </div>
+        </loop>
+    </section>
+    <section class="py-5">
+        <div id="container-content-archive" class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <!-- Starts the loop for posts -->
+                <loop>
+                    <div class="col mb-4">
+                        <div class="card shadow-sm h-100">
+                            <!-- Thumbnail -->
+                            <div class="lc-block position-relative">
+
+                                <if field="image">
+
+                                    <img src="{Field image_url size='medium'}" srcset="{Field image_srcset}"
+                                        sizes="{Field image_sizes}" class="w-100"
+                                        style="height: 256px; object-fit: cover" alt="{Field image_alt}">
+
+                                    <else>
+                                        <img src="https://placehold.co/600x400?text=Placeholder" class="w-100"
+                                            style="height: 256px; object-fit: cover" alt="Placeholder image">
+                                    </else>
+                                </if>
+
+                                <div class="position-absolute top-0 end-0 mt-1 me-1 text-end opacity-75">
+                                    <!-- Post Categories -->
+                                    <loop type="taxonomy_term" taxonomy="category" post="current">
+                                        <a href="{Field url}"
+                                            class="badge bg-primary rounded-pill link-light text-decoration-none">
+                                            <field name="title"></field>
+                                        </a>
+                                    </loop>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="lc-block">
+                                    <!-- Post Date -->
+                                    <small class="text-muted">
+                                        <date locale="{Setting WPLANG}">
+                                            <field name="publish_date"> </field>
+                                        </date>
+                                    </small>
+                                </div>
+                                <div class="lc-block">
+                                    <!-- Post Title -->
+                                    <h2>
+                                        <a href="{Field url}" class="stretched-link">
+                                            <field name="title"></field>
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div class="lc-block card-text mb-2">
+                                    <!-- Post Excerpt -->
+                                    <Field name="excerpt" auto="true" words="30" more="..."></Field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </loop>
+                <!-- End of the loop -->
+            </div>
+            <!-- Pagination -->
+            <div class="pt-4">
+
+                [lc_the_pagination class="pagination pagination-lg justify-content-center"]
+
+                <!-- TODO: LNL ALTERNATIVE DOES NOT WORK -->
+                <!-- 
+				<pagination class="pagination pagination-lg justify-content-center"></pagination>
+				-->
+
+            </div>
+        </div>
+    </section>
+</tangible>

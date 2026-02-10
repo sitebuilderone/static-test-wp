@@ -1,0 +1,113 @@
+<section item-type="twig">
+    <h1>Twig Template</h1>
+
+    <div class="alert alert-info" style="font-size: 12px; margin-bottom: 15px;">
+        Write Twig template code inside &lt;twig&gt;&lt;/twig&gt; tags. Powered by Picowind theme.
+    </div>
+
+    <form class="add-common-form-elements">
+
+        <div id="twig-snippets" style="margin-bottom: 15px;">
+            <label>Insert Snippet</label>
+            <select class="form-control" name="twig_snippet" onchange="lcInsertTwigSnippet(this.value); this.value='';">
+                <option value="">Choose a snippet...</option>
+                <optgroup label="Post Data">
+                    <option value="post-title">Post Title</option>
+                    <option value="post-content">Post Content</option>
+                    <option value="post-excerpt">Post Excerpt</option>
+                    <option value="post-date">Post Date</option>
+                    <option value="post-author">Post Author</option>
+                </optgroup>
+                <optgroup label="Control Structures">
+                    <option value="loop">For Loop</option>
+                    <option value="if">If Condition</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option value="custom">Empty Twig Block</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div>
+            <label>Twig Code
+                <i style="float:right; cursor: pointer;" onclick="alert('Preview updates automatically on save')">Preview Info</i>
+            </label>
+            <textarea name="twig_code" rows="10" placeholder="Enter Twig template code..."></textarea>
+        </div>
+
+        <div style="margin-top: 15px; padding: 10px; border-radius: 4px; font-size: 11px;">
+            <strong>Available Variables:</strong>
+            <ul style="margin: 5px 0 0 0; padding-left: 20px;">
+                <li><code>post</code> - Current post object</li>
+                <li><code>site</code> - Site information</li>
+                <li><code>user</code> - Current user</li>
+                <li><code>posts</code> - Posts collection (in loops)</li>
+            </ul>
+            <strong>Examples:</strong><br>
+            <code>{{ post.title }}</code><br>
+            <code>{{ post.author.name }}</code><br>
+            <code>{% for item in posts %}...{% endfor %}</code>
+        </div>
+
+    </form>
+</section>
+
+<!-- JavaScript for Twig Panel -->
+<script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="twig"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // When panel becomes visible, initialize fields
+        onVisible(PANEL_SELECTOR, () => {
+            const selector = panel.getAttribute("selector");
+            const theSection = $(PANEL_SELECTOR);
+
+            // Get the inner content of the <twig> element
+            const twigElement = doc.querySelector(selector);
+            if (twigElement) {
+                const twigCode = twigElement.innerHTML.trim();
+                theSection.find("textarea[name=twig_code]").val(twigCode);
+            }
+        });
+    });
+</script>
+
+<script>
+$(document).ready(function ($) {
+
+    // When user changes Twig code, update the element
+    $("body").on("change", "#sidepanel section[item-type=twig] textarea[name=twig_code]", function(e) {
+        e.preventDefault();
+
+        const selector = $(this).closest("section[selector]").attr("selector");
+        const twigCode = $(this).val();
+
+        // Update the <twig> element content
+        if (doc.querySelector(selector)) {
+            doc.querySelector(selector).innerHTML = twigCode;
+
+            // Trigger preview update
+            updatePreviewSectorial(selector);
+        }
+    });
+
+    // Auto-update on keyup with debounce
+    let twigUpdateTimeout;
+    $("body").on("keyup", "#sidepanel section[item-type=twig] textarea[name=twig_code]", function(e) {
+        const $this = $(this);
+        const selector = $this.closest("section[selector]").attr("selector");
+        const twigCode = $this.val();
+
+        clearTimeout(twigUpdateTimeout);
+        twigUpdateTimeout = setTimeout(function() {
+            if (doc.querySelector(selector)) {
+                doc.querySelector(selector).innerHTML = twigCode;
+                updatePreviewSectorial(selector);
+            }
+        }, 500); // Update after 500ms of no typing
+    });
+
+}); // end doc ready
+</script>

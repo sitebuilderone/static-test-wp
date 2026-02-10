@@ -1,0 +1,109 @@
+<section item-type="gmap-embed">
+    <h1>Google Map</h1>
+    <form class="add-common-form-elements">
+        <div>
+            <label>Address</label>
+            <input class="zoomable" type="text" name="address" value=""
+                placeholder="Enter  URL from Youtube / Vimeo / etc.">
+
+        </div>
+        <div>
+            <label>Zoom</label>
+            <input type="range" min="1" max="20" class="form-control" name="zoom" value="">
+
+        </div>
+
+        <div>
+            <label>Aspect ratio </label>
+           
+
+            <select class="form-control" name="video_format_classes" target="classes">
+
+                <optgroup framework="bootstrap-5" label="BS5">
+                    <option value="ratio-21x9">21 by 9</option>
+                    <option value="ratio-16x9">16 by 9</option>
+                    <option value="ratio-4x3">4 by 3</option>
+                    <option value="ratio-1x1">1 by 1</option>
+                </optgroup>
+
+                <optgroup framework="bootstrap-4" label="BS4">
+                    <option value="embed-responsive-21by9">21 by 9</option>
+                    <option value="embed-responsive-16by9">16 by 9</option>
+                    <option value="embed-responsive-4by3">4 by 3</option>
+                    <option value="embed-responsive-1by1">1 by 1</option>
+                </optgroup>
+
+            </select>
+
+
+        </div>
+
+    </form>
+</section>
+
+
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="gmap-embed"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+
+            var iframe_url = getAttributeValue(selector + " iframe", "src");
+            var params = lc_parseParams(iframe_url);
+            theSection.find("input[name='address']").val(params['q']);
+            theSection.find("input[name='zoom']").val(params['z']);
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+
+<script>
+
+//////////// GMAPS /////////////////////////////////////////////////////////////////////////////////
+ 
+
+$(document).ready(function ($) {
+    
+    //ON INPUT CHANGE, update HTML
+    $('#sidepanel').on('change', 'section[item-type=gmap-embed] input', function (event) {    
+        event.preventDefault();
+        var selector=$(this).closest("section[selector]").attr("selector");
+        var theSection=$(this).closest("section[selector]");
+        var address=theSection.find("input[name='address']").val();
+        var zoom=theSection.find("input[name='zoom']").val();
+        var iframe_url="https://maps.google.com/maps?q="+encodeURIComponent(address)+"&t=m&z="+zoom+"&output=embed&iwloc=near";
+        setAttributeValue(selector+" iframe","src",iframe_url);
+        updatePreviewSectorial(selector);
+	}); //end function
+
+}); //end doc ready
+</script>

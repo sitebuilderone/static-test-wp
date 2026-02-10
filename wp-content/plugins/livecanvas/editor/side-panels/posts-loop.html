@@ -1,0 +1,311 @@
+<section item-type="posts-loop">
+    <h1>Posts Loop</h1>
+    <form class="add-common-form-elements">
+
+        <div class="sidebar-form-contextual-buttons">
+            <a class="highlight-button" href="#" data-reveal=".lc-post-query-tabcontent"><i class="fa fa-cogs"></i>Posts
+                Query </a>
+            <a class=" " href="#" data-reveal=".lc-post-output-tabcontent"><i class="fa fa-puzzle-piece"></i> Output
+                View</a>
+        </div>
+        <div class="items-to-reveal" style="padding:0 !important">
+            <div class="lc-post-query-tabcontent">
+
+
+                <div>
+                    <label>Post Type </label>
+                    <input type="text" name="post_type" value="post" placeholder="post / page">
+                </div>
+
+                <div>
+                    <label>Number of Items </label>
+                    <input type="number" min="1" max="999" name="posts_per_page" value="">
+                </div>
+
+                <div>
+                    <label>Author ID</label>
+                    <input type="text" name="author" value="" placeholder="1">
+                </div>
+
+                <div>
+                    <label>Category ID</label>
+                    <div class="bbe-bastard-input-wrap">
+
+                        <input type="text" name="category" value="" placeholder="1,2,3">
+                        <!--
+					<select class="form-control"  id="lc-cats-select">
+						<option class="level-0" value="1">Uncategorized</option>
+					</select>
+					-->
+                    </div>
+                </div>
+
+                <div>
+                    <label>Include only IDs</label>
+                    <input type="text" name="include" value="" placeholder="1,2,3">
+                </div>
+
+                <div>
+                    <label>Exclude IDs</label>
+                    <input type="text" name="exclude" value="" placeholder="1,2,3">
+                </div>
+
+                <div>
+                    <label>Post Parent ID</label>
+                    <input type="text" name="post_parent" value="" placeholder="">
+                </div>
+
+                <div>
+                    <label>Custom Field Key </label>
+                    <input type="text" name="meta_key" value="" placeholder="Custom Field Key">
+                </div>
+
+                <div>
+                    <label>Custom Field Value </label>
+                    <input type="text" name="meta_value" value="" placeholder="Custom Field Value">
+                </div>
+
+
+                <div>
+                    <label>Taxonomy </label>
+                    <input type="text" name="tax_query" value="" placeholder="post_tag=1">
+                </div>
+
+
+                <div>
+                    <label>Order By </label>
+                    <select class="form-control" name="orderby">
+
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="date">Date</option>
+                        <option value="modified">Last modified date</option>
+                        <option value="ID">ID</option>
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+                        <option value="menu_order">Menu Order</option>
+                        <option value="comment_count">Comment Count</option>
+                        <option value="rand">Random</option>
+                    </select>
+
+                </div>
+
+                <div>
+                    <label>Sort Order </label>
+                    <select class="form-control" name="order">
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="desc">Descending</option>
+                        <option value="asc">Ascending</option>
+                    </select>
+
+                </div>
+
+            </div> <!-- /tab -->
+
+            <div hidden class="lc-post-output-tabcontent">
+
+                <!-- output_view -->
+                <div>
+                    <label>Layout <a hidden style="float:right;text-decoration: underline"
+                            class="open-dynamic-templates" href="#">Dynamic Templates...</a></label>
+
+                    <select class="form-control" name="output_view">
+                        <optgroup label="LC Built-in Views">
+                            <option value="" selected="selected">Plain / Default / Template in Shortcode</option>
+                            <option value="lc_get_posts_listing_view">Listing (Links only)</option>
+                            <option value="lc_get_posts_media_object_view">Basic (Media Object)</option>
+                            <option value="lc_get_posts_card_view">Cards</option>
+                            <option value="lc_get_posts_collapsible_view_bs5">Collapsible</option>
+                        </optgroup>
+                        <optgroup label="Advanced Views">
+                            <option value="lc_get_posts_dynamic_view">Dynamic Template </option>
+                            <option value="lc_get_posts_mycustom_view">PHP Callback </option>
+                            <option value="lc_get_posts_theme_loop_view">Theme Partial File </option>
+                        </optgroup>
+
+                    </select>
+
+
+                </div>
+
+                <!-- output_theme_loop_name -->
+                <div hidden id="output_theme_loop_name_wrap">
+                    <label> Partial File Name <br>(without extension, in /loops folder)</label>
+                    <input type="text" name="output_theme_loop_name" value="" placeholder="cards">
+                </div>
+
+                <!-- output_dynamic_view_id -->
+                <div hidden id="output_dynamic_view_id_wrap">
+                    <label> Dynamic Template ID (Optional)</label>
+                    <input type="text" name="output_dynamic_view_id" value="" placeholder="Default">
+                </div>
+
+
+                <!-- output_number_of_columns -->
+                <div>
+                    <label>Number of Columns</label>
+                    <select class="form-control" name="output_number_of_columns">
+                        <option value="">Choose...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected="selected">3</option>
+                        <option value="4">4</option>
+
+                    </select>
+                </div>
+
+                <!-- output_no_results_message -->
+                <div>
+                    <label>Message in case of No Results </label>
+                    <input type="text" name="output_no_results_message" value="" placeholder="No results found">
+                </div>
+
+                <!-- output_wrapper_class -->
+                <div>
+                    <label>Output Wrapper Class[es] </label>
+                    <input type="text" name="output_wrapper_class" value="">
+                </div>
+
+                <!-- output_article_wrapper_class -->
+                <div>
+                    <label>Output Article Wrapper Class[es] </label>
+                    <input type="text" name="output_article_wrapper_class" value="" placeholder="mb-3 mb-md-4">
+                </div>
+
+                <!-- output_article_class -->
+                <div>
+                    <label>Output Article Class[es] </label>
+                    <input type="text" name="output_article_class" value="">
+                </div>
+
+                <!-- hide_elements -->
+                <div>
+                    <label>Hide Elements (list) <small style="float: right"><a
+                                onclick="$(this).closest('section').find('[name=output_hide_elements]').val('Author, Date, FeaturedImage, Excerpt, Category, Comments').change();">All</a></small></label>
+                    <input type="text" name="output_hide_elements" rows="3" value=""
+                        placeholder="Title, Author, Date, FeaturedImage, Excerpt, Category, Comments">
+                </div>
+
+                <!-- output_excerpt_length -->
+                <div>
+                    <label>Excerpt Length (in Words) </label>
+                    <input type="number" name="output_excerpt_length" min="1" max="999" value="">
+                </div>
+
+                <!-- output_excerpt_text -->
+                <div>
+                    <label>More Text </label>
+                    <input type="text" name="output_excerpt_text" value="">
+                </div>
+
+
+                <!-- output_heading_tag -->
+                <div>
+                    <label>Headings Tag</label>
+                    <select class="form-control" name="output_heading_tag">
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="h1">H1</option>
+                        <option value="h2">H2</option>
+                        <option value="h3">H3</option>
+                        <option value="h4">H4</option>
+                        <option value="h5">H5</option>
+                        <option value="h6">H6</option>
+                        <option value="span">span</option>
+                        <!-- <option value="li">li</option> -->
+
+                    </select>
+                </div>
+
+                <!-- output_link_classes -->
+                <div>
+                    <label>Output Link Class[es] </label>
+                    <input type="text" name="output_link_class" value="">
+                </div>
+
+
+                <!--
+				<div>
+					<label>Featured Image Position</label>
+					<select class="form-control" name="output_featured_image_before">
+						<option value="" selected="selected">Choose...</option>
+						<option value="">After Title</option>
+						<option value="1">Before Title</option>
+					</select>
+				</div>
+				-->
+
+
+                <div>
+                    <label>Featured Image Format</label>
+                    <select class="form-control" name="output_featured_image_format">
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="thumbnail">thumbnail</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="full">Full</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <label>Featured Image Class[es]</label>
+                    <input type="text" name="output_featured_image_class" value="">
+                </div>
+            </div> <!-- /.lc-post-output-tabcontent -->
+        </div><!-- /.items-to-reveal -->
+
+    </form>
+</section>
+
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="posts-loop"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+
+            //leg
+            var theShortcode = doc.querySelector(selector).innerHTML;
+            //loop all input items to initialize input fields
+            theSection.find("*[name]").each(function(index, el) {
+                fieldName = $(el).attr("name");
+                fieldValue = lc_get_parameter_value_from_shortcode(fieldName, theShortcode);
+                //console.log("set "+fieldName+" to "+fieldValue);
+                if (fieldValue !== "") theSection.find("[name=" + fieldName + "]").val(fieldValue);
+            }); //end each    
+
+            //trigger output view change - see side-panel-advanced-helpers
+            $("#sidepanel section[item-type='posts-loop'] .lc-post-output-tabcontent select[name=output_view]").change();
+
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+

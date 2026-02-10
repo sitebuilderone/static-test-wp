@@ -1,0 +1,123 @@
+<section class="p-10 space-y-10 bg-base-100 text-base-content">
+	<div class="text-center max-w-2xl mx-auto">
+		<h1 class="text-4xl font-bold mb-3">🌲 Picowind + Timber Template Showcase</h1>
+		<p class="text-base-content/70">
+			A comparison of <strong>Twig</strong>, <strong>Blade</strong>, and <strong>Latte</strong> using a typical Timber single-post context:
+			<code>site</code>, <code>post</code>, and <code>options</code>.
+		</p>
+	</div>
+
+	<div class="grid md:grid-cols-3 gap-8">
+
+		<!-- 🪶 Twig Example -->
+
+		<div>
+			<twig>
+				<article class="card bg-base-200 shadow-md">
+					<div class="card-body">
+						<h2 class="card-title text-error">Twig</h2>
+						<pre class="text-sm leading-relaxed overflow-x-auto"><code>
+					<h1>{{ post.title }}</h1>
+					<p class="opacity-70">
+						By {{ post.author.name }} • 
+						<time datetime="{{ post.date('Y-m-d H:i:s') }}">{{ post.date }}</time>
+					</p>
+
+					<ul class="mt-4 flex flex-wrap gap-2 list-none p-0 m-0">
+						{% for term in post.terms({ taxonomy: 'category' }) %}
+						<li>
+							<a href="{{ term.link }}" class="badge badge-error badge-outline hover:badge-error text-xs">
+								{{ term.title }}
+							</a>
+						</li>
+						{% endfor %}
+					</ul>
+
+					<div class="mt-6 text-sm opacity-70">
+						Part of {{ site.name }} • Contact us: 
+						<a href="mailto:{{ options.contact_email }}" class="link link-hover">{{ options.contact_email }}</a>
+					</div>
+					</code></pre>
+					</div>
+				</article>
+			</twig>
+
+
+		</div>
+
+
+		<!-- ⚡ Blade Example -->
+
+
+		<div>
+			<blade>
+				<article class="card bg-base-200 shadow-md">
+					<div class="card-body">
+						<h2 class="card-title text-primary">Blade</h2>
+						<pre class="text-sm leading-relaxed overflow-x-auto"><code>
+					<h1>{{ $post->title }}</h1>
+					<p class="opacity-70">
+						By {{ $post->author->name }} • 
+						<time datetime="{{ $post->date('Y-m-d H:i:s') }}">{{ $post->date }}</time>
+					</p>
+
+					<ul class="mt-4 flex flex-wrap gap-2 list-none p-0 m-0">
+						@foreach ($post->terms(['taxonomy' => 'category']) as $term)f
+						<li>
+							<a href="{{ $term->link }}" class="badge badge-primary badge-outline hover:badge-primary text-xs">
+								{{ $term->title }}
+							</a>
+						</li>
+						@endforeach
+					</ul>
+
+					<div class="mt-6 text-sm opacity-70">
+						Part of {{ $site->name }} • Contact us: 
+						<a href="mailto:{{ $options->contact_email }}" class="link link-hover">{{ $options->contact_email }}</a>
+					</div>
+					</code></pre>
+					</div>
+				</article>
+			</blade>
+		</div>
+
+
+		<!-- 🧩 Latte Example -->
+
+
+		<div>
+			<latte>
+				<article class="card bg-base-200 shadow-md">
+					<div class="card-body">
+						<h2 class="card-title text-warning">Latte</h2>
+						<pre class="text-sm leading-relaxed overflow-x-auto"><code>
+					<h1>{$post->title}</h1>
+					<p class="opacity-70">
+						By {$post->author->name} • 
+						<time datetime="{$post->date('Y-m-d H:i:s')}">{$post->date}</time>
+					</p>
+
+					<ul class="mt-4 flex flex-wrap gap-2 list-none p-0 m-0">
+						{foreach $post->terms(['taxonomy' => 'category']) as $term}
+						<li>
+							<a href="{$term->link}" class="badge badge-warning badge-outline hover:badge-warning text-xs">
+								{$term->title}
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+
+					<div class="mt-6 text-sm opacity-70">
+						Part of {$site->name} • Contact us: 
+						<a href="mailto:{$options->contact_email}" class="link link-hover">{$options->contact_email}</a>
+					</div>
+					</code></pre>
+					</div>
+				</article>
+			</latte>
+		</div>
+
+
+
+	</div>
+</section>

@@ -1,0 +1,90 @@
+<section item-type="video-bg">
+    <h1>Video Background</h1>
+    <form class="add-common-form-elements">
+
+        <div id="video-mp4-samples" class="sidepanel-secondary-part" hidden="">
+            <label> Sample Videos</label>
+            <select class="form-control" name="video_mp4_url_presets">
+                <option>Choose Video...</option>
+                <option value="https://cdn.livecanvas.com/media/architecture/video.mp4">architecture</option>
+                <option value="https://cdn.livecanvas.com/media/business/video.mp4">business</option>
+                <option value="https://cdn.livecanvas.com/media/car/video.mp4">car</option>
+                <option value="https://cdn.livecanvas.com/media/church/video.mp4">church</option>
+                <option value="https://cdn.livecanvas.com/media/edu/video.mp4">education</option>
+                <option value="https://cdn.livecanvas.com/media/fashion/video.mp4">fashion</option>
+                <option value="https://cdn.livecanvas.com/media/food/video.mp4">food</option>
+                <option value="https://cdn.livecanvas.com/media/fitness/video.mp4">gym &amp; fitness</option>
+                <option value="https://cdn.livecanvas.com/media/hotel/video.mp4">hotel</option>
+                <option value="https://cdn.livecanvas.com/media/music/video.mp4">music</option>
+                <option value="https://cdn.livecanvas.com/media/nature/video.mp4">nature</option>
+                <option value="https://cdn.livecanvas.com/media/people/video.mp4">people</option>
+                <option value="https://cdn.livecanvas.com/media/wedding/video.mp4">wedding</option>
+            </select>
+        </div>
+
+        <div>
+            <label>MP4 URL <a style="float:right;text-decoration: underline" onClick="$('#video-mp4-samples').slideToggle();">Examples</a></label>
+            <input type="text" name="video_mp4_url" value="" class="zoomable" placeholder="Enter  URL....">
+        </div>
+
+        <div>
+            <label>Poster Image URL</label>
+            <input type="text" attribute-name="poster" value="" placeholder="Enter  URL" class="zoomable">
+        </div>
+
+        <div>
+                <label>Controls</label>
+                <select class="form-control" attribute-name="controls" name="controls">
+                    <option value="">No</option>
+                    <option value="true">Yes</option> 
+                </select>
+        </div>
+
+        <div>
+                <label>Autoplay</label>
+                <select class="form-control" attribute-name="autoplay" noname="controls">
+                    <option value="">No</option>
+                    <option value="true">Yes</option> 
+                </select>
+        </div>
+    </form>
+</section>
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+   document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="video-bg"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            console.log("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            const videoUrl = getAttributeValue(`${selector} source`, "src");
+            panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // Input: video URL
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+
+        // Select: presets
+        panel.querySelector('select[name="video_mp4_url_presets"]')
+            .addEventListener("change", e => {
+                const input = panel.querySelector('input[name="video_mp4_url"]');
+                input.value = e.target.value;
+                input.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+    });
+
+</script>

@@ -1,0 +1,62 @@
+//Accordion style
+.accordion-button {
+    font-weight: $headings-font-weight-sm;
+}
+
+//custo underline-accordion
+.accordion{
+    --#{$prefix}accordion-color: var(--#{$prefix}body-color);
+}
+.accordion.accordion-custom {
+    .accordion-item {
+        border: $border-width solid var(--#{$prefix}border-color);
+        border-radius: $accordion-border-radius;
+    }
+    .accordion-body {
+        padding-top: 0;
+    }
+    .accordion-button {
+        transition: all .25s;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: var(--#{$prefix}body-bg);
+        border-radius: $border-radius;
+        box-shadow:none;
+        &::after {
+            background-image: none;
+            font-weight: normal;
+            font-family: bootstrap-icons !important;
+            transform: rotate(90deg);
+            content: "\F282";
+            font-size: $font-size-sm;
+            color:currentColor;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1rem;
+            height: 1rem;
+            text-align:center;
+            line-height: 1;
+            box-sizing: content-box;
+        }
+    }
+    .accordion-collapse,.accordion-button:not(.collapsed){
+        background-color:var(--#{$prefix}tertiary-bg);
+        color: var(--#{$prefix}body-color);
+    }
+    .accordion-collapse{
+        border-bottom-left-radius: $accordion-border-radius;
+        border-bottom-right-radius: $accordion-border-radius;
+    }
+    .accordion-button:not(.collapsed) {
+        box-shadow: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        &::after {
+            background-image: none;
+            transform: rotate(0);
+            color: $primary;
+        }
+    }
+}

@@ -1,0 +1,71 @@
+<section class="text-dark bg-light"><style>
+    .section-wrapper {
+        position: relative;}
+    .container {
+        position: relative; /* Add this to make container the positioning context */
+    }
+    .header-image-container {
+        position: absolute;
+        left: 0; /* Adjust based on container padding */
+        top: -60px; /* Adjust to span across topbar */
+        height: [sbo_one_logo_height]px;
+        width: [sbo_one_logo_width]px;
+        z-index: 100;
+    }
+    .header-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    </style>
+	<section class="section-wrapper">
+		<div id="wrapper-topbar" class="py-3 bg-light text-dark">
+			<div class="container">
+				<div class="row">
+					<div id="topbar-content" class="col-md-12 text-end">
+						<!-- address -->
+						<a class="text-reset text-decoration-none me-4" href="[sbo_one_google_map_url]" 
+						target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to view our location on Google Maps" aria-label="View location on Google Maps">
+							<svg style="width:1em;height:1em" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M12,2C15.31,2 18,4.66 18,7.95C18,12.41 12,19 12,19C12,19 6,12.41 6,7.95C6,4.66 8.69,2 12,2M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M20,19C20,21.21 16.42,23 12,23C7.58,23 4,21.21 4,19C4,17.71 5.22,16.56 7.11,15.83L7.75,16.74C6.67,17.19 6,17.81 6,18.5C6,19.88 8.69,21 12,21C15.31,21 18,19.88 18,18.5C18,17.81 17.33,17.19 16.25,16.74L16.89,15.83C18.78,16.56 20,17.71 20,19Z">
+								</path>
+							</svg><span class="d-none d-md-inline">[sbo_one_street_address] [sbo_one_city]</span></a>
+						<!-- phone number -->
+						<a class="text-reset text-decoration-none me-4" href="tel:+[sbo_one_phone_web_ready]" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Call us at [sbo_one_business_phone]">
+							<svg style="width:1em;height:1em" viewBox="0 0 24 24">
+								<path fill="currentColor" d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"></path>
+							</svg> Call us <span class="d-none d-md-inline">: [sbo_one_business_phone] </span> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-expand-lg py-3 navbar-light">
+			<div class="container">
+				<!-- Image container outside header -->
+				<div class="header-image-container " data-bs-toggle="tooltip" data-bs-placement="bottom" title="[sbo_website_name]">
+					<a class="navbar-brand" href="[lc_home_url]"><img class="header-image img-fluid p-2" src="[sbo_one_business_logo]" width="200px;" alt="[sbo_one_headline]"></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar3" aria-controls="myNavbar3" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="lc-block collapse navbar-collapse justify-content-end" id="myNavbar3">
+					<div lc-helper="shortcode" class="live-shortcode">[lc_nav_menu theme_location="primary" container_class="" container_id="" menu_class="navbar-nav me-3"]</div>
+					<div class="lc-block d-grid gap-3 d-lg-block">
+						<tangible class="live-refresh">
+							<loop acf_repeater="one_header_cta_buttons" from="options">
+								<if field="one_button_link">
+									<!-- Button Exists -->
+									<a href="{Field one_button_link}" class="btn {Field one_button_class}" role="button">
+										<if field="one_button_text">
+											<field name="one_button_text"></field>
+										</if>
+									</a>
+								</if>
+							</loop>
+						</tangible>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</section>
+</section>

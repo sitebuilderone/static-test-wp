@@ -1,0 +1,732 @@
+<section item-type="image">
+    <h1>Image</h1>
+    <form id="image-attributes" class="add-common-form-elements">
+
+
+        <div id="image-extras-original" style="padding:0">
+            <div class="sidebar-form-contextual-buttons">
+                <a class="lc-show-wpadmin-search" href="#" data-reveal=".lc-wpadmin-imagesearch-wrap"><i
+                        class="fa fa-wordpress"></i> Upload /<br> Local </a>
+                <a class="lc-show-unsplash-search" href="#" data-reveal=".lc-unsplash-search-wrap"><i
+                        class="fa fa-camera"></i> UnSplash Photos</a>
+                <!-- <a class="lc-show-opensvg-search" href="#" data-reveal=".lc-opensvg-search-wrap"><i class="fa fa-image"></i> OpenSVG <br>Vectors</a> -->
+                <a class="lc-show-vectorial-clipart" href="#" data-reveal=".lc-vectorial-search-wrap"><i
+                        class="fa fa-image"></i> Vectorial <br>Clipart</a>
+            </div>
+            <div class="items-to-reveal">
+                <div class="lc-wpadmin-imagesearch-wrap" hidden>
+
+                    <div class="wpadmin-loading" style="text-align:center" hidden>
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+
+                    <iframe hidden frameborder="0" scrolling="auto" marginwidth="0" marginheight="0"
+                        class="wpadmin-image-browser-iframe" src=""></iframe>
+
+                    <div hidden class="wpadmin-image-format-chooser">
+                        <div class="preview"></div>
+                        <span>Choose Format:</span>
+                        <a format="thumbnail">Thumb</a>
+                        <a format="medium">Medium</a>
+                        <a format="medium_large">Med/Large</a>
+                        <a format="large">Large</a>
+                        <a format="full">Full</a>
+                    </div>
+                </div><!-- end wpadmin wrap -->
+
+                <div class="lc-unsplash-search-wrap" hidden>
+
+                    <div>
+                        <label>UnSplash Image Search </label>
+                        <input type="text" name="unsplash-search-by-keyword" value="" data-page="1"
+                            placeholder="Enter search Keyword...">
+                    </div>
+
+                    <div>
+                        <label>UnSplash Image Format</label>
+                        <select class="form-control" name="unsplash-search-orientation">
+
+                            <option value="landscape">Landscape</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="squarish">Squarish</option>
+
+                        </select>
+                    </div>
+
+                    <div class="lc-unsplash-search-results img-search-results"></div>
+                </div> <!-- end unsplash wrap -->
+
+                <div class="lc-opensvg-search-wrap " hidden>
+
+                    <div>
+                        <label>OpenSVG Vectorial Image Search </label>
+                        <input type="text" name="opensvg-search-by-keyword" value="" data-page="1"
+                            placeholder="Enter search Keyword...">
+                    </div>
+
+                    <div class="lc-opensvg-search-results img-search-results"></div>
+                </div> <!-- end opensvg wrap -->
+
+                <div class="lc-vectorial-search-wrap" hidden>
+
+                    <div class="lc-vectorial-images"></div>
+                </div> <!-- end undrap wrap -->
+
+            </div> <!-- end items-to-reveal -->
+        </div> <!-- end image-extras-original -->
+        <div class="separator"></div>
+
+        <div>
+            <label style="margin-top:0">Image Preview</label>
+            <div class="preview-image">
+            </div>
+
+
+            <div>
+                <label>SRC (URL)</label>
+                <input class="zoomable" type="text" attribute-name="src" value="" placeholder="Enter Image URL">
+            </div>
+
+            <div>
+                <label>SRCSET</label>
+                <textarea style="min-height:30px; " class="zoomable" attribute-name="srcset" value="" placeholder="">
+			</textarea>
+            </div>
+
+            <div>
+                <label>SIZES</label>
+                <input type="text" style="min-height:30px;" class="zoomable" attribute-name="sizes" value=""
+                    placeholder="">
+
+            </div>
+            <div style="display: flex;">
+                <div>
+                    <label>Width</label>
+                    <input class="ff-width-120" type="number" attribute-name="width" value="" placeholder="(px)">
+                </div>
+
+                <div>
+                    <label>Height</label>
+                    <input class="ff-width-120" type="number" attribute-name="height" value="" placeholder="(px)">
+                </div>
+            </div>
+
+            <div>
+                <label>ALT</label>
+                <input class="zoomable" type="text" attribute-name="alt" value=""
+                    placeholder="Enter a description of the image">
+            </div>
+            <div>
+                <label>Linked URL (optional)</label>
+                <input class="zoomable link-target-url" type="text" value="" placeholder="https://www.mysite.com">
+            </div>
+            <div>
+                <label>Lazy Loading</label>
+                <select class="form-control" attribute-name="loading" name="image_loading">
+                    <option value=""></option>
+                    <option value="lazy">Lazy (YES)</option>
+                    <option value="eager">Eager (NO)</option>
+                </select>
+            </div>
+            <div class="imgix-fx">
+                <label>IMGIX Image Effects (Unsplash only)</label>
+                <select id="imgix-fx-original" class="form-control" name="imgix_fx" target="[attribute-name=src]">
+                    <option value="">Add Effect...</option>
+
+                    <optgroup label="🎨 Artistic & Retro">
+                        <option value="&htn=18">Halftone</option>
+                        <option value="&px=8">Pixellate Fine</option>
+                        <option value="&px=20">Pixellate Coarse</option>
+                        <option value="&sepia=80">Sepia Warm</option>
+                        <option value="&invert=true">Invert Colors</option>
+                        <option value="&duotone=ff6f61,2c2c2c">Duotone Warm</option>
+                        <option value="&duotone=00d4ff,00274d">Duotone Cool</option>
+                        <option value="&duotone=ffe600,ff0000">Duotone Fire</option>
+                        <option value="&duotone=00ff99,6600ff">Duotone Neon</option>
+                    </optgroup>
+
+                    <optgroup label="🌈 Cinematic Color Tones">
+                        <option value="&blend=c83349&bm=color">Red Tones</option>
+                        <option value="&blend=FFF300&bm=color">Yellow Tones</option>
+                        <option value="&blend=3BF500&bm=color">Green Tones</option>
+                        <option value="&blend=00ffff&bm=color">Cyan Tones</option>
+                        <option value="&blend=ff00ff&bm=color">Magenta Tones</option>
+                        <option value="&blend=222222&bm=color">Dark Mood</option>
+                        <option value="&blend=ffaa00&bm=color&blend-mode=multiply">Warm Sunset</option>
+                        <option value="&blend=001f3f&bm=color&blend-mode=multiply">Deep Blue</option>
+                    </optgroup>
+
+                    <optgroup label="🎛 Color Manipulation & Glitch">
+                        <option value="&gam=-55.6">Gamma Twist</option>
+                        <option value="&hue=243.8">Hue Shift</option>
+                        <option value="&hue=120">Hue Green</option>
+                        <option value="&hue=300">Hue Purple</option>
+                        <option value="&sat=-100">Desaturate</option>
+                        <option value="&sat=200">Saturation Blast</option>
+                        <option value="&vib=100">Vibrance Boost</option>
+                        <option value="&vib=-100">Vibrance Kill</option>
+                    </optgroup>
+
+                    <optgroup label="✨ Light, Shadows & Contrast">
+                        <option value="&contrast=50">High Contrast</option>
+                        <option value="&contrast=-50">Low Contrast</option>
+                        <option value="&shad=-50">Darken Shadows</option>
+                        <option value="&shad=50">Lighten Shadows</option>
+                        <option value="&high=-50">Reduce Highlights</option>
+                        <option value="&high=50">Bright Highlights</option>
+                        <option value="&exp=-50">Underexpose</option>
+                        <option value="&exp=50">Overexpose</option>
+                    </optgroup>
+
+                    <optgroup label="🌀 Blur & Depth">
+                        <option value="&blur=5">Slight Blur</option>
+                        <option value="&blur=20">Strong Blur</option>
+                        <option value="&blur=50">Extreme Blur</option>
+                        <option value="&bg=000000&blur=50&blend-mode=screen">Soft Glow</option>
+                    </optgroup>
+
+                    <optgroup label="😎 Face & Crop Tricks">
+                        <option value="&faceindex=1">Face Index</option>
+                        <option value="&facepad=3&fit=facearea">Face Zoom</option>
+                        <option value="&crop=faces&fit=crop">Crop to Faces</option>
+                        <option value="&crop=edges&fit=crop">Crop to Edges</option>
+                    </optgroup>
+
+                    <optgroup label="🧪 Experimental / Extreme">
+                        <option value="&usm=81.6">Stencilize</option>
+                        <option value="&sat=250&hue=200&contrast=100">Cyberpunk Glow</option>
+                        <option value="&invert=true&sat=200&contrast=100">Negative Pop</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- <div class="separator"> </div> -->
+            <div>
+                <label> Image Size</label>
+                <select class="form-control" name="responsiveness_classes" target="classes">
+
+                    <option value="">Default</option>
+                    <option value="w-25">25%</option>
+                    <option value="w-50">50%</option>
+                    <option value="w-75">75%</option>
+                    <option value="w-100">100%</option>
+
+
+                </select>
+            </div>
+            <div>
+                <label>Responsive Image</label>
+                <select class="form-control" name="responsiveness_classes" target="classes">
+
+                    <option value="">No</option>
+
+                    <option value="img-fluid">Yes</option>
+
+
+                </select>
+            </div>
+
+
+            <div>
+                <label>Align Image</label>
+                <select class="form-control" name="alignment_classes" target="classes">
+
+                    <option value="">Standard</option>
+
+                        <optgroup framework="bootstrap-5" label="BS5">
+
+                            <option value="float-start">float-start</option>
+                            <option value="float-end">float-end</option>
+                            <!-- <option value="mx-auto d-block">H Center</option> -->
+                            <!-- removed, as multiple classes here break the JS -->
+
+                        </optgroup>    
+
+                        <optgroup framework="bootstrap-4" label="BS4">
+
+                            <option value="float-left">float-left</option>
+                            <option value="float-right">float-right</option> 
+
+                        </optgroup>    
+
+
+
+                </select>
+            </div>
+
+
+
+            <div>
+                <label>Border</label>
+                <select class="form-control" name="border_classes" target="classes">
+
+                    <option value="">Standard</option>
+
+                    <option value="img-thumbnail">img-thumbnail</option>
+                    <option value="border">border</option>
+
+
+                </select>
+            </div>
+
+            <div>
+                <label>Border-radius</label>
+                <select class="form-control" name="border_radius_classes" target="classes">
+
+                    <option value="">Standard</option>
+
+                    <option value="rounded-circle">rounded-circle</option>
+                    <option value="rounded">rounded</option>
+
+
+                </select>
+            </div>
+
+
+            <h3>Margin</h3>
+
+            <div class="widget-wrapper-flex" get_content_from="#the-margins">
+
+
+    </form>
+</section>
+
+
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+    
+   document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="image"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        // consider that fields with "attribute-name" are already handled
+        onVisible(PANEL_SELECTOR, () => {
+            //alert("Panel is about to become visible: " + panel.getAttribute("item-type"));
+
+            const selector = panel.getAttribute("selector");
+            //just examples
+            //const videoUrl = getAttributeValue(`${selector} source`, "src");
+            //panel.querySelector('input[name="video_mp4_url"]').value = videoUrl;
+
+            //adapt to jQuery
+            theSection = $(PANEL_SELECTOR);
+
+            //Update Image Preview
+            theSection.find(".preview-image").css("background-image", "url(" + theSection.find("*[attribute-name=src]").val() + ")");
+            //check if imgix widget is appropriate
+            if (theSection.find("*[attribute-name=src]").val().includes("unsplash.com")) theSection.find(".imgix-fx").show();
+                else theSection.find(".imgix-fx").hide();
+
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+
+        // just a sample - this part is accomplished by legacy code below, which is perfectly fine
+        /*
+        panel.querySelector('input[name="video_mp4_url"]')
+            .addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                setAttributeValue(`${selector} source`, "src", e.target.value);
+                updatePreviewSectorial(selector);
+            });
+        */
+    });
+
+</script>
+
+
+
+
+
+<script>
+//////////////////////////////////////////////////////  IMAGES ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+$(document).ready(function ($) {    
+    
+    ////////////////////////////// IMAGE   ////////////////////////////////
+    //upon src input change, trigger change in document | attribute values editing
+    $("body").on("change", "#sidepanel section[item-type=image] *[attribute-name=src]",function(){
+        $("#sidepanel section[item-type=image] .preview-image").css("background-image","url("+$(this).val()+")");
+    });
+        
+    //////////////////////////////////////   BACKGROUND ////////////////////////////////////////////////////////
+    //upon src input change, substitute in inline css the image url //////////////////////////
+    $('#sidepanel').on('change', 'section[item-type=background] input[name=background-image]', function (event) {    
+        event.preventDefault();
+        if ($(this).val()==='') {$(this).val("#");}
+        var old_url=$("#sidepanel section[item-type=background] input[name=background-image]").attr("data-old-url"); 
+        var old_css=$("#sidepanel section[item-type=background] textarea[attribute-name=style]").val();
+        if (old_css=="") old_css='background:url(#)  center / cover no-repeat;';
+        var new_css=old_css.replace(old_url, $(this).val());
+        $("#sidepanel section[item-type=background] textarea[attribute-name=style]").val((new_css)).change();
+        
+        $("#sidepanel section[item-type=background] .preview-image").css("background-image","url("+$(this).val()+")");
+        
+        $(this).attr("data-old-url",$(this).val());
+    });//end function
+
+    //LINK  TARGET URL CHANGE ////
+
+    //INPUT changes: trigger change in document 
+    $("body").on("change", "#sidepanel section .link-target-url", function() {
+        myConsoleLog("link-target-url values editing");
+        var selector = $(this).closest("section").attr("selector");
+        var superparent_selector = CSSelectorForDoc(doc.querySelector(selector).parentNode.parentNode);
+
+        //ADD IDENTIFIER CLASS
+        var random_identifier_class_name="lc-temp-identifier-"+generateReadableName();
+        doc.querySelector(selector).classList.add(random_identifier_class_name);
+        
+        if ($(this).val()==""){
+            //CASE URL VALUE IS EMPTY: IF PARENT ELEMENT IS AN ANCHOR, UNWRAP IMAGE
+            if(doc.querySelector(selector).parentNode.tagName==="A") {
+                myConsoleLog("Unwrap item");
+                image_html = doc.querySelector(selector).outerHTML;
+                doc.querySelector(selector).parentNode.outerHTML = image_html; 
+            }
+        } else {
+            //CASE URL VALUE IS NOT EMPTY: IF PARENT ELEMENT IS NOT AN ANCHOR, WRAP IMAGE WITH LINK, ELSE UPDATE HREF ATTRIBUTE
+            if(doc.querySelector(selector).parentNode.tagName!=="A") {
+                myConsoleLog("Wrap item in a");
+                image_html = doc.querySelector(selector).outerHTML; 
+                doc.querySelector(selector).outerHTML = "<a href='"+$(this).val()+"'> \n" + image_html + "\n</a>";
+            }  else 
+            doc.querySelector(selector).parentNode.setAttribute("href",  $(this).val());
+        }
+
+        //UPDATE PANEL SELECTOR SO WE WORK ON THE REAL NEW ICON / IMAGE IN THE NEXT EDITING MOMENT
+        var new_selector = CSSelectorForDoc(doc.querySelector("."+random_identifier_class_name));
+        $(this).closest("section").attr("selector", new_selector);
+
+        //REMOVE THE IDENTIFIER CLASS 
+        doc.querySelector(new_selector).classList.remove(random_identifier_class_name);
+
+        //UPDATE THE PREVIEW
+        updatePreviewSectorial(superparent_selector);
+        
+    });
+
+    //////////////////////////////////////////////////// WPADMIN IMAGES //////////////////////////////////////////////////////////////////////////////
+        
+    ///CLICK WPADMIN TAB
+    $("#sidepanel").on("click", ".lc-show-wpadmin-search", function (event) {
+        if($(this).hasClass("highlight-button")) return; ///proceed only when opening tab
+        current_section=$(this).closest("section");
+        current_section.find(".wpadmin-image-format-chooser .preview").click(); 
+    });
+
+    ///CLICK   WPADMIN & SHOW SEARCH INTERFACE
+    $("#sidepanel").on("click", ".wpadmin-image-format-chooser .preview", function (event) {
+        event.preventDefault();
+        current_section=$(this).closest("section");
+        current_section.find(".wpadmin-loading").show();
+        current_section.find(".wpadmin-image-format-chooser").hide();
+        var the_iframe=current_section.find('.lc-wpadmin-imagesearch-wrap iframe');
+        //if(the_iframe.attr("src")=="")
+        the_iframe.hide().attr("src",lc_editor_media_upload_url);
+        setTimeout(function(){ the_iframe.fadeIn(100); }, 1000);
+    });
+
+    ///CLICK A FORMAT AND APPLY IMAGE
+    $("#sidepanel").on("click", ".wpadmin-image-format-chooser a", function (event) {
+        event.preventDefault();
+        current_section = $(this).closest("section"); 
+        var currentPostId = $(this).attr("attachment-id");
+        $.post(
+            lc_editor_saving_url, {
+                'action': 'lc_get_img_tag', 
+                'security': lc_editor_saving_nonce,
+                'post_id': currentPostId,
+                'format': $(this).attr("format"),
+        },
+            function (response) {
+                try { 
+                    result = JSON.parse(response);
+                    current_section.find(" *[attribute-name='src'], *[name='background-image']").val(result.src).change();
+                    current_section.find(" *[attribute-name='width']").val(result?.width).change();
+                    current_section.find(" *[attribute-name='height']").val(result?.height).change();
+                    current_section.find(" *[attribute-name='srcset']").val(result?.srcset).change();  
+                    current_section.find(" *[attribute-name='sizes']").val(result?.sizes).change(); 
+                    current_section.find(" *[attribute-name='alt']").val(result?.alt).change();
+                    var imgClasses = current_section.find(" *[attribute-name='class']");
+                    var classRegex = new RegExp('[\\s:]?wp-image-[^\\D]*', 'gm');
+                    imgClasses.val(imgClasses.val().replace(classRegex, '') + ' ' + 'wp-image-' + currentPostId).change();
+                    imgClasses.val(imgClasses.val().replace(/^\s+/,''));
+                    
+                } catch(e) {
+                    alert("Image data fetch error: "+e);
+                }
+            }
+        );
+
+
+        
+    });
+
+
+
+    //////////////////////////////////////////////////// UNSPLASH //////////////////////////////////////////////////////////////////////////////
+
+    //IMAGES: UNSPLASH  init Search Pagination when focusing search input //////////////////////////
+    $('#sidepanel').on('focus', 'input[name="unsplash-search-by-keyword"]', function () {
+        //INIT PAGINATION
+        $(this).attr("data-page","1");
+        myConsoleLog("init pagination");
+    });
+
+    //IMAGES: UNSPLASH  Search by Keyword ////////////////////////// (used in both <IMG> and bg image cases)
+    $('#sidepanel').on('change', 'input[name="unsplash-search-by-keyword"]', function (event) {
+        event.preventDefault();
+        var current_page=parseInt($(this).attr("data-page"),10);
+        var current_section=$(this).closest("section");
+        
+        current_section.find(".lc-unsplash-search-results").html("<div class='donut'></div>"); //ADD SPINNER
+        var orientation=current_section.find("[name=unsplash-search-orientation]").val();
+        var jqxhr = $.getJSON("https://api.unsplash.com/search/photos/?client_id=241722b04b93fb65e1514ad48c3e916f5399e7766e5fa0dba784e008b9866216&orientation="+orientation+"&query="+$(this).val()+"&page="+current_page , function(a) {
+            //console.log(a.results);
+            var headingText='<small><p>'+a.total+' results.  Page <b>'+current_page+' of '+a.total_pages+'</b></p>  </small>';
+            html_li="";
+            
+            function replaceUnSplashFormat(url) {
+                return url.replace("&fm=jpg&", "&fm=avif&");
+            }
+
+            $.each(a.results, function (index, el) {
+                html_li += '<li><img class="" src="' + replaceUnSplashFormat(el.urls.thumb) + '" alt="" data-src-small="' + replaceUnSplashFormat(el.urls.small) + '" data-src-regular="' + replaceUnSplashFormat(el.urls.regular) + '" data-author-name="' + el.user.name + '"></li>';
+            });
+
+            //check if we have to add pagination buttons
+            if ( current_page>1 )  prevButton="<button class='lc-unsplash-pagination-button lc-pagination-button  lcb' data-page='"+(current_page-1)+"' > Previous<br>Page</button>"; else   prevButton="";    
+            if (a.total_pages>current_page)  nextButton="<button class='lc-unsplash-pagination-button lc-pagination-button  lcb' data-page='"+(1+current_page)+"' >  Next <br>Page </button>"; else   nextButton="";
+            
+            current_section.find(".lc-unsplash-search-results").html(headingText+'<ul>' + html_li + '</ul>'+ prevButton+nextButton); 
+                
+        }); //end loaded json ok
+        
+        jqxhr.fail(function() {
+            swal("Network error. Could not connect to UnSplash. Try later.");
+            current_section.find(".lc-unsplash-search-results").html("");
+        });
+    }); //end  func
+
+    function setUnsplashSrcset(current_section,img_url){
+        $.post(
+            lc_editor_saving_url, {
+            'action': 'lc_ajax_unsplash_srcset',
+            'security': lc_editor_saving_nonce,
+            'image_url': img_url,
+        },
+            function (response) {
+                try {
+                    result = JSON.parse(response);
+                    current_section.find(" *[attribute-name='width']").val(result?.width).change();
+                    current_section.find(" *[attribute-name='height']").val(result?.height).change();
+                    current_section.find(" *[attribute-name='srcset']").val(result?.srcset).change();
+                    current_section.find(" *[attribute-name='sizes']").val(result?.sizes).change();
+
+                } catch (e) {
+                    alert("Image data fetch error: " + e);
+                }
+            }
+        );
+    }
+    ///CLICK UNSPLASH RESULT - IMAGES <img> VERSION
+    $("#sidepanel").on("click", " .lc-unsplash-search-results img", function (event) {
+        event.preventDefault();
+        var current_section=$(this).closest("section");
+        var img_url=$(this).attr("data-src-regular");
+        if ($("[name=unsplash-search-orientation]").val()=="landscape") img_url=img_url.replace("w=1080","w=1080&h=768").replace("fit=max","fit=crop"); //refine format  
+        if ($("[name=unsplash-search-orientation]").val()=="squarish") img_url=img_url.replace("w=1080","w=1080&h=1080").replace("fit=max","fit=crop"); //refine format  
+        //reset sizes and srcset fields
+        current_section.find(" *[attribute-name='width'],  *[attribute-name='height'], *[attribute-name='srcset'], *[attribute-name='sizes'] ").val('').change();
+        //set image src
+        current_section.find(" input[attribute-name='src'], input[name='background-image']").val(img_url).change();
+        current_section.find(" input[attribute-name='alt']").val("Photo by "+$(this).attr("data-author-name")).change();
+        //srcset experiment
+        setUnsplashSrcset(current_section, img_url);
+
+    });
+        
+
+    //UNSPLASH PAGINATION buttons clicked
+    $("#sidepanel").on("click", ".lc-unsplash-pagination-button", function (event) {
+        event.preventDefault();
+        var current_page=$(this).attr("data-page");
+        var current_section=$(this).closest("section");
+        current_section.find('input[name="unsplash-search-by-keyword"]').attr("data-page",current_page).change(); 
+    });
+        
+    //IMAGES: UNSPLASH  change format   //////////////////////////
+    $('#sidepanel').on('change', 'select[name="unsplash-search-orientation"]', function (event) {
+        var current_section=$(this).closest("section");
+        current_section.find('input[name="unsplash-search-by-keyword"]').change();
+    });
+
+
+    /////////////////////////////IMGIX FX ////////////////////////////////
+    $('#sidepanel').on('change', ' select[name=imgix_fx]', function (event) {    
+        event.preventDefault();
+        var target_selector=$(this).attr('target');
+        current_image_url=$(this).closest("section").find(target_selector).val();
+        //alert(current_image_url);
+        //get rid of all other elements in select
+        $(this).find("option").each(function(index,element) { 
+                    the_value= $(element).val(); //myConsoleLog(the_value);
+                    current_image_url=current_image_url.replace(the_value,'').trim(); //kill the class if present
+        });
+        var current_selected_item=$(this).val();
+        current_image_url=current_image_url+current_selected_item;
+        $(this).closest("section").find(target_selector).val(current_image_url).change();
+    });//end function
+
+
+    //INPUT changes: on image url change, check if we show imgix fx
+    $("body").on("change", "#sidepanel section[item-type=image] *[attribute-name=src], #sidepanel section[item-type=background] *[name=background-image]",function(){
+        if ($(this).val().includes("unsplash.com")) {
+            //if unsplash img update through ajax call
+            $(".imgix-fx").show();
+            current_section = $(this).closest("section");
+            setUnsplashSrcset(current_section, $(this).val());
+            return;
+        }
+        $(".imgix-fx").hide();
+    });
+
+
+    //////////////// OPENSVG ///////////////////////////
+    /*
+    //IMAGES: UNSPLASH  init Search Pagination when focusing search input //////////////////////////
+    $('#sidepanel').on('focus', 'input[name="opensvg-search-by-keyword"]', function () {
+        //INIT PAGINATION
+        $(this).attr("data-page","1");
+        myConsoleLog("init pagination");
+    });
+
+    //SVG Search by Keyword //////////////////////////
+    jQuery('body').on('change', 'input[name="opensvg-search-by-keyword"]', function (event) {
+        event.preventDefault();
+        var current_page=parseInt($(this).attr("data-page"),10);
+        var current_section=$(this).closest("section");
+        
+        current_section.find(".lc-opensvg-search-results").html("<div class='donut'></div>"); //ADD SPINNER
+
+        var jqxhr = jQuery.getJSON("https://openclipart.org/search/json/?query="+jQuery(this).val()+"&amount=10&page="+current_page , function(a) {
+            myConsoleLog(a);
+            var headingText='<small><p>'+a.info.results+' images found.  Page <b>'+current_page+' of '+a.info.pages+'</b></p>  </small>';
+            
+            var html_li="";
+            jQuery.each(a.payload, function( index,el ) {
+                html_li+=' <li> <a href="#" data-url="'+el.svg.url+'"> <img class="" src="' +el.svg.png_thumb+'" alt=""></a></li>   ';
+            });
+            //check if we have to add pagination buttons
+            if ( current_page>1 )  prevButton="<button class='lc-opensvg-pagination-button lc-pagination-button  lcb' data-page='"+(current_page-1)+"' >&laquo; Previous<br>Page</button>"; else   prevButton="";    
+            if (a.info.pages>current_page)  nextButton="<button class='lc-opensvg-pagination-button lc-pagination-button  lcb' data-page='"+(1+current_page)+"' >Next <br>Page &raquo;</button>"; else   nextButton="";
+            current_section.find(".lc-opensvg-search-results").html(headingText+'<ul>' + html_li + '</ul>'+ prevButton+nextButton); //POPULATE HTML FORM WITH OPTION        
+            }); //end loaded json ok
+        
+        jqxhr.fail(function() { 		swal("Sorry, there is a problem connecting to the OpenSVG library."); 		});
+        
+        
+    }); //end input change function
+                
+    //SVG Click Search Result
+    jQuery("body").on("click", ".lc-opensvg-search-results a[data-url]", function (event) {
+        event.preventDefault();
+        var current_section=$(this).closest("section");
+        var img_url=jQuery(this).attr("data-url");
+        current_section.find(" input[attribute-name='src'], input[name='background-image']").val(img_url).change();
+        //current_section.find(" input[attribute-name='alt']").val("Photo by "+$(this).attr("data-author-name")).change();
+        
+    });
+
+        
+    //PAGINATION buttons clicked
+    $("#sidepanel").on("click", ".lc-opensvg-pagination-button", function (event) {
+        event.preventDefault();
+        var current_page=$(this).attr("data-page");
+        var current_section=$(this).closest("section");
+        current_section.find('input[name="opensvg-search-by-keyword"]').attr("data-page",current_page).change(); 
+    });
+            
+    */
+    ////////////////////////////////// VECTORIAL CLIPART ////////////////////////////////////////////////
+
+    function lc_list_images(images_array,collection_name,final_cta){
+        var html_li='<h4> '+collection_name+' </h4> <ul>'; 
+        jQuery.each(images_array, function( index,el ) {
+                    html_li+=' <li> <a href="#">   <img data-lazy="https://cdn.livecanvas.com/media/svg/' +el +'"  alt=""></a></li>   ';
+            });
+        html_li = html_li + '</ul> <h5> '+final_cta+' </h5> '; 
+        return html_li;
+
+    }   
+        
+    ////////WHEN VECTORIAL PANEL IS OPENED, DRAW THE IMAGE PREVIEWS
+    $("#sidepanel").on("click",".lc-show-vectorial-clipart:not(.highlight-button)", function (event) {
+        event.preventDefault();
+        
+        //use this to generate arrays https://codepen.io/franciskim/pen/eNjrpR
+        var undraw_images_array=["undraw-sample/undraw_wordpress_utxt.svg", "undraw-sample/undraw_connected_world_wuay.svg", "undraw-sample/undraw_world_9iqb.svg", "undraw-sample/undraw_video_influencer_9oyy.svg", "undraw-sample/undraw_video_streaming_yyld.svg", "undraw-sample/undraw_steps_ngvm.svg", "undraw-sample/undraw_experience_design_eq3j.svg", "undraw-sample/undraw_to_the_moon_v1mv.svg", "undraw-sample/undraw_heatmap_uyye.svg", "undraw-sample/undraw_Mobile_application_mr4r.svg"];
+        var lukas_images_array=["lukaszadam/7.svg","lukaszadam/10.svg","lukaszadam/11.svg","lukaszadam/12.svg","lukaszadam/14.svg","lukaszadam/15.svg","lukaszadam/16.svg","lukaszadam/17.svg","lukaszadam/18.svg","lukaszadam/19.svg","lukaszadam/22.svg","lukaszadam/23.svg","lukaszadam/27.svg","lukaszadam/28.svg","lukaszadam/30.svg","lukaszadam/36.svg","lukaszadam/37.svg","lukaszadam/38.svg","lukaszadam/40.svg","lukaszadam/41.svg","lukaszadam/290.svg","lukaszadam/Asset 20.svg","lukaszadam/Asset 30.svg","lukaszadam/Asset 40.svg","lukaszadam/Asset 50.svg","lukaszadam/Asset 60.svg","lukaszadam/Asset 70.svg","lukaszadam/Asset 74.svg","lukaszadam/Asset 75.svg","lukaszadam/Asset 76.svg","lukaszadam/Asset 77.svg","lukaszadam/Asset 78.svg","lukaszadam/Asset 79.svg","lukaszadam/Asset 80 2.svg","lukaszadam/Asset 80 3.svg","lukaszadam/Asset 80.svg","lukaszadam/Asset 81.svg","lukaszadam/Asset 82.svg","lukaszadam/Asset 83.svg","lukaszadam/Asset 84.svg","lukaszadam/Asset 85.svg","lukaszadam/Asset 86.svg","lukaszadam/Asset 87.svg","lukaszadam/Asset 88.svg","lukaszadam/Asset 89.svg","lukaszadam/Asset 90 2.svg","lukaszadam/Asset 90 3.svg","lukaszadam/Asset 90.svg","lukaszadam/Asset 91.svg","lukaszadam/Asset 92.svg","lukaszadam/Asset 93.svg","lukaszadam/Asset 94.svg","lukaszadam/Asset 95.svg","lukaszadam/Asset 96.svg","lukaszadam/Asset 97.svg","lukaszadam/Asset 100.svg","lukaszadam/Asset 170.svg","lukaszadam/Asset 180.svg","lukaszadam/Asset 190 2.svg","lukaszadam/Asset 190.svg","lukaszadam/Asset 200 2.svg","lukaszadam/Asset 200.svg","lukaszadam/Asset 210 2.svg","lukaszadam/Asset 210.svg","lukaszadam/Asset 220 2.svg","lukaszadam/Asset 220.svg","lukaszadam/Asset 230.svg","lukaszadam/Asset 240.svg","lukaszadam/Asset 250.svg","lukaszadam/Asset 290.svg","lukaszadam/Asset 300.svg","lukaszadam/Asset 330.svg","lukaszadam/Asset 340.svg","lukaszadam/Asset 350.svg","lukaszadam/Asset 360.svg","lukaszadam/Asset 370.svg","lukaszadam/Asset 380.svg","lukaszadam/Asset 460.svg","lukaszadam/Asset 470.svg","lukaszadam/Asset 480.svg","lukaszadam/Asset 490.svg","lukaszadam/Asset 500.svg","lukaszadam/Asset 510.svg"];
+        var isometric_images_array=["isometric/Analytics_SVG.svg","isometric/Chat_SVG.svg","isometric/City_SVG.svg","isometric/Coding_SVG.svg","isometric/Creative_process_SVG.svg","isometric/Cryptocurrency_SVG.svg","isometric/Data_analysis_SVG.svg","isometric/Data_chart_SVG.svg","isometric/Degital_marketing_SVG.svg","isometric/Delivery_app_SVG.svg","isometric/Farmacy_SVG.svg","isometric/Financial_insurance_SVG.svg","isometric/Investment_SVG.svg","isometric/Map_SVG.svg","isometric/Marketing_strategy_SVG.svg","isometric/Mobile_notification_SVG.svg","isometric/Online_banking_SVG.svg","isometric/Online_education_SVG.svg","isometric/Social_media_adv_SVG.svg","isometric/Startup_SVG.svg","isometric/Web_SVG.svg","isometric/Web_design_SVG.svg","isometric/Web_hosting_SVG.svg","isometric/app_development_SVG.svg","isometric/payment_completed_SVG.svg","isometric/workspace_SVG.svg","isometric/Business_SVG.svg","isometric/Money_SVG.svg","isometric/Online_shopping_SVG.svg","isometric/SEO_SVG.svg","isometric/Search_SVG.svg","isometric/Workspace_2_SVG.svg"];
+        var drawkit_images_array=["drawkit/5c130301ae722d15669d267e_drawkit-charts-and-graphs.svg","drawkit/5c18815260ec1ad2acf8d06e_drawkit-nature-man-colour.svg","drawkit/5c130339d3261a0c43c32bf0_drawkit-developer-woman-colour.svg","drawkit/5c3429d690599d276db3112c_error-404-colour.svg","drawkit/5c37ce85e3cff74e120e427e_doctor-colour.svg","drawkit/5c3e7176c5034627e6b019f3_breakfast-colour.svg","drawkit/5c468f2a46b11943e664fb05_lifting-colour.svg","drawkit/5c47906dc604e536b612cc72_a-ok-colour.svg","drawkit/5c4910b2ef5a1c67f8771909_choices-colour.svg","drawkit/5c53a947a8cd6f0bcc8c1a24_holding-phone-colour.svg","drawkit/5c4fe6d7e6dca141c24389d8_handshake-colour.svg","drawkit/5c748ef25492e1745063350e_hiker-man-colour.svg","drawkit/5c58db855b02ed46133255c0_drawkit-fast-food-colour.svg","drawkit/5c74932ba272b1537a7f2334_support-notes-colour.svg","drawkit/5c80a29f0119be7090bc7e08_shopping-cart-colour.svg","drawkit/5c80a8640119be490fbc8770_carry-on.svg","drawkit/5c80a770ab24dc060e7bb7fb_carry-on-colour.svg","drawkit/5c95790211cd0dcccb7aaef3_travel-tickets-colour.svg","drawkit/5c908e0ea5701d29399dab32_storefront-colour.svg","drawkit/5ca568049a78ea786d159fdc_shipping-package-colour.svg","drawkit/5cc11740198b8d79d5c41595_pet-toys-colour.svg","drawkit/5ca6dfa17fb859d2fa1fa796_dog-colour.svg","drawkit/5cf90eb78e7d8a7004e01097_student-colour.svg","drawkit/5cf9c61080918118f65f1fad_food-delivery-colour.svg","drawkit/5cd1095392fac9ada3178d8b_schoolbooks-colour.svg","drawkit/5d00730bec964676b82a1182_photographer-colour.svg","drawkit/5cfc5a87982a741c64ef91d1_headphones-colour.svg","drawkit/5d0212a83f3338ae01c66e4b_calendar-colour.svg","drawkit/5d09d6e19c7900756ada9103_ticket-colour.svg","drawkit/5d12fbb511126003d2c4acd0_reading-corner-colour.svg","drawkit/5d12fd7f99bb70bce60bdbe3_entryway-colour.svg","drawkit/5d1d688effdd168a6d30ffbd_gameboy-colour.svg","drawkit/5d256cacad8c0c64b25fc91d_directions-colour.svg","drawkit/5d1d7d72a9dee46e119189f6_gamer-colour.svg","drawkit/5d26c09d33fe1c87f61115e8_map-colour.svg","drawkit/5d2d9db1b4a76d3fb0398a29_unlock.svg"];
+        
+        
+        
+        $(".lc-vectorial-images").append(  lc_list_images(undraw_images_array,"Undraw","View and grab more similar great images at <a href='https://undraw.co' target='_blank'>UnDraw.co</a>")  );
+        $(".lc-vectorial-images").append(  lc_list_images(isometric_images_array,"Isometric","Order custom isometric images at <a href='https://isometric.online/contact/' target='_blank'>https://isometric.online/</a>")  );
+        $(".lc-vectorial-images").append(  lc_list_images(drawkit_images_array,"Drawkit","Order custom illustrations at <a href='https://www.drawkit.io/custom' target='_blank'>https://www.drawkit.io/</a>")  );
+        $(".lc-vectorial-images").append(  lc_list_images(lukas_images_array,"Lukasz Adam","Enquire for more similar great images at <a href='https://lukaszadam.com/' target='_blank'>lukaszadam.com</a>")  );
+        
+            
+            ///LAZYLOAD///////
+        const targets = document.querySelectorAll('.lc-vectorial-images img');
+        
+        const lazyLoad = target => {
+            const io = new IntersectionObserver((entries, observer) => { 
+            entries.forEach(entry => { 
+            
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-lazy');
+            
+                    img.setAttribute('src', src);
+                    img.classList.add('fade');
+            
+                    observer.disconnect();
+                }
+            });
+            });
+            
+            io.observe(target);
+        };
+            
+        targets.forEach(lazyLoad);
+        //END LAZYLOAD 
+
+        
+    }); // end on click
+            
+            
+            
+            
+    ///WHEN UNDRAW PREVIEW IMAGE IS CLICKED, PLACE IT IN THE DOCUMENT  
+    $("#sidepanel").on("click",".lc-vectorial-images ul li a", function (event) {
+        event.preventDefault(); 
+        var current_section=$(this).closest("section");
+        var img_url=$(this).find("img").attr("data-lazy");
+        
+        //reset sizes and srcset fields
+        current_section.find(" *[attribute-name='width'],  *[attribute-name='height'], *[attribute-name='srcset'], *[attribute-name='sizes'] ").val('').change();
+
+        //set image url
+        current_section.find(" input[attribute-name='src'], input[name='background-image']").val(img_url).change();
+        
+        });
+   
+});
+</script>

@@ -1,0 +1,302 @@
+
+<section item-type="tangible-loop">
+    <h1>Tangible Loop</h1>
+    <form class="DONOT-add-common-form-elements">
+
+        <div class="sidebar-form-contextual-buttons">
+            <a class="highlight-button" href="#" data-reveal=".lc-tangible-post-query-tabcontent"><i class="fa fa-cogs"></i> Query </a>
+            <a class=" " href="#" data-reveal=".lc-post-output-tabcontent"><i class="fa fa-puzzle-piece"></i> Output View</a>
+        </div>
+        <div class="items-to-reveal" style="padding:0 !important">
+            <div class="lc-tangible-post-query-tabcontent">
+
+
+                <div>
+                    <label>Post Type </label>
+                    <input type="text" loop-parameter="type" value="post" placeholder="post / page">
+                </div>
+
+
+
+                <div>
+                    <label>Number of Items per Page</label>
+                    <input type="number" min="1" max="999" class="form-control" loop-parameter="paged" value="">
+                </div>
+
+                <div>
+                    <label>Number of Items (Limit Results)  </label>
+                    <input type="number" min="1" max="999" loop-parameter="count" value="">
+                </div>
+                <div>
+                    <label>Offset (Skip initial posts)</label>
+                    <input type="number" min="1" max="999" loop-parameter="offset" value="">
+                </div>
+
+                <div>
+                    <label>Author ID</label>
+                    <input type="text" loop-parameter="author" value="" placeholder="1">
+                </div>
+
+                <div>
+                    <label>Category Slug / ID</label>
+                    <div class="bbe-bastard-input-wrap">
+
+                        <input type="text" loop-parameter="category" value="" placeholder="1,2,3">
+                        <!--
+					<select class="form-control"  id="lc-cats-select">
+						<option class="level-0" value="1">Uncategorized</option>
+					</select>
+					-->
+                    </div>
+                </div>
+
+                <div>
+                    <label>Include only IDs</label>
+                    <input type="text" loop-parameter="include" value="" placeholder="1,2,3">
+                </div>
+
+                <div>
+                    <label>Exclude IDs</label>
+                    <input type="text" loop-parameter="exclude" value="" placeholder="1,2,3">
+                </div>
+
+                <div>
+                    <label>Post Parent ID</label>
+                    <input type="text" loop-parameter="post_parent" value="" placeholder="">
+                </div>
+
+                <div>
+                    <label>Custom Field Key </label>
+                    <input type="text" loop-parameter="meta_key" value="" placeholder="Custom Field Key">
+                </div>
+
+                <div>
+                    <label>Custom Field Value </label>
+                    <input type="text" loop-parameter="meta_value" value="" placeholder="Custom Field Value">
+                </div>
+
+
+                <div>
+                    <label>Taxonomy </label>
+                    <input type="text" loop-parameter="tax_query" value="" placeholder="post_tag=1">
+                </div>
+
+
+                <div>
+                    <label>Order By </label>
+                    <select class="form-control" loop-parameter="orderby">
+
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="date">Date</option>
+                        <option value="modified">Last modified date</option>
+                        <option value="ID">ID</option>
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+                        <option value="menu_order">Menu Order</option>
+                        <option value="comment_count">Comment Count</option>
+                        <option value="rand">Random</option>
+                    </select>
+
+                </div>
+
+                <div>
+                    <label>Sort Order </label>
+                    <select class="form-control" loop-parameter="order">
+                        <option value="" selected="selected">Choose...</option>
+                        <option value="desc">Descending</option>
+                        <option value="asc">Ascending</option>
+                    </select>
+
+                </div>
+
+ 
+
+
+                <h5 style="margin-top:30px">ACF</h5>
+                <style>
+                    .acf-editing-fields input {    color: var(--color1) !important;}
+                </style>
+                <div class="acf-editing-fields">
+
+                    <div hidden>
+                        <label>  Field   </label>
+                        <input type="text" loop-parameter="field" value="" placeholder="Custom Field Name">
+                    </div>
+
+
+                    <div hidden>
+                        <label>ACF Image Field </label>
+                        <input type="text" loop-parameter="acf_image" value="" placeholder="Custom Field Name">
+                    </div>
+                    <div>
+                        <label>ACF Gallery Field </label>
+                        <input type="text" loop-parameter="acf_gallery" value="" placeholder="Custom Field Name">
+                    </div>
+
+                    <div>
+                        <label>ACF Repeater Field </label>
+                        <input type="text" loop-parameter="acf_repeater" value="" placeholder="Custom Field Name">
+                    </div>
+
+                </div>
+
+            </div> <!-- /tab -->
+
+            <div hidden class="lc-post-output-tabcontent">
+
+                <p>The view of this post loop is using the <b>Tangible Loops and Logic</b> syntax.</p>
+                <p>You can  <a style="text-decoration: underline;" class="sidepanel-action-edit-html" alt="Open Code Editor">view and edit the code</a>, 
+                to alter the presentation of results.
+                </p>
+                <p>Learn more about how to use it in the <a target="_blank" style="text-decoration: underline;"
+                        href="https://docs.livecanvas.com/tangible/">Documentation page</a>.</p>
+                 
+                
+              
+
+            </div> <!-- /.lc-post-output-tabcontent -->
+        </div><!-- /.items-to-reveal -->
+
+    </form>
+</section>
+
+<!-- THE JS SIDE OF THE MOON -->
+<script type="module">
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const PANEL_SELECTOR = 'section[item-type="tangible-loop"]';
+        const panel = document.querySelector(PANEL_SELECTOR);
+        if (!panel) return;
+
+        // Helper: Get Loop tag attributes from tangible blob
+        function getLoopAttribute(selector, attrName) {
+            
+            let parentSelector = selector.split(" > ").slice(0, -1).join(" > ");
+            let tangibleEl = doc.querySelector(parentSelector);
+
+            if (!tangibleEl) {
+                myConsoleLog('getLoopAttribute: parent element not found ' + parentSelector);
+                return '';
+            }
+
+            // If this is a script tag with type tangible, use it
+            // NOTE: This panel only works with tangible (not twig)
+            if (tangibleEl.tagName === 'SCRIPT' && tangibleEl.getAttribute('type') === 'tangible') {
+                // Good, we have the right element
+            }
+
+            const content = tangibleEl.textContent || tangibleEl.innerHTML;
+            myConsoleLog('getLoopAttribute: content length ' + content.length + ' tag: ' + tangibleEl.tagName);
+
+            // Find <loop with regex (case-insensitive)
+            const loopMatch = content.match(/<loop\s+([^>]*)>/i);
+            if (!loopMatch) {
+                myConsoleLog('getLoopAttribute: no loop tag found');
+                return '';
+            }
+
+            const attributes = loopMatch[1];
+            myConsoleLog('getLoopAttribute: attributes ' + attributes);
+
+            // Extract specific attribute (handle both quoted and unquoted values)
+            const attrRegex = new RegExp(`${attrName}\\s*=\\s*["']([^"']*)["']`, 'i');
+            const attrMatch = attributes.match(attrRegex);
+
+            const result = attrMatch ? attrMatch[1] : '';
+            myConsoleLog('getLoopAttribute: ' + attrName + ' = ' + result);
+            return result;
+        }
+
+        // Helper: Set Loop tag attribute in tangible blob
+        function setLoopAttribute(selector, attrName, value) {
+            // If the selector points to a loop element, strip it first
+            let parentSelector = selector.split(" > ").slice(0, -1).join(" > ");
+            let tangibleEl = doc.querySelector(parentSelector);
+            if (!tangibleEl) {
+                myConsoleLog('setLoopAttribute: element not found ' + parentSelector);
+                return;
+            }
+
+            // Find the script[type="tangible"] tag if not already
+            // NOTE: This panel only works with tangible (not twig)
+            if (tangibleEl.tagName !== 'SCRIPT' || tangibleEl.getAttribute('type') !== 'tangible') {
+                const scriptTag = tangibleEl.querySelector('script[type="tangible"]');
+                if (scriptTag) {
+                    tangibleEl = scriptTag;
+                } else {
+                    myConsoleLog('setLoopAttribute: no tangible script tag found (this panel only works with tangible, not twig)');
+                    return;
+                }
+            }
+
+            let content = tangibleEl.textContent || tangibleEl.innerHTML;
+
+            // Find <loop tag (case-insensitive)
+            const loopMatch = content.match(/(<loop\s+)([^>]*)(>)/i);
+            if (!loopMatch) {
+                myConsoleLog('setLoopAttribute: no loop tag found');
+                return;
+            }
+
+            let attributes = loopMatch[2];
+            const attrRegex = new RegExp(`${attrName}\\s*=\\s*["'][^"']*["']`, 'i');
+
+            if (value === '' || value === null) {
+                // Remove attribute
+                attributes = attributes.replace(new RegExp(`\\s*${attrName}\\s*=\\s*["'][^"']*["']`, 'gi'), '');
+            } else if (attrRegex.test(attributes)) {
+                // Update existing attribute
+                attributes = attributes.replace(attrRegex, `${attrName}="${value}"`);
+            } else {
+                // Add new attribute
+                attributes += ` ${attrName}="${value}"`;
+            }
+
+            // Reconstruct the content
+            const newLoop = loopMatch[1] + attributes.trim() + loopMatch[3];
+            content = content.replace(/<loop\s+[^>]*>/i, newLoop);
+
+            myConsoleLog('setLoopAttribute: ' + attrName + ' = ' + value);
+
+            // Update the tangible element
+            tangibleEl.textContent = content;
+        }
+
+        // WHEN PANEL BECOMES VISIBLE, INITIALIZE THE PANEL FIELDS
+        onVisible(PANEL_SELECTOR, () => {
+            myConsoleLog("Panel is about to become visible: tangible-loop");
+
+            const selector = panel.getAttribute("selector");
+
+            // Populate all loop-parameter inputs
+            panel.querySelectorAll('[loop-parameter]').forEach(input => {
+                const paramName = input.getAttribute('loop-parameter');
+                const value = getLoopAttribute(selector, paramName);
+
+                if (input.tagName === 'SELECT') {
+                    input.value = value;
+                } else {
+                    input.value = value;
+                }
+            });
+        });
+
+        // USER CHANGES INPUTS: APPLY CHANGES TO DOCUMENT
+        panel.querySelectorAll('[loop-parameter]').forEach(input => {
+            input.addEventListener("change", e => {
+                const selector = panel.getAttribute("selector");
+                const paramName = input.getAttribute('loop-parameter');
+                const value = e.target.value;
+
+                setLoopAttribute(selector, paramName, value);
+
+                // Update preview with adjusted selector (strip 'loop' part if present)
+ 
+                let parentSelector = selector.split(" > ").slice(0, -1).join(" > ");
+                     
+                updatePreviewSectorial(parentSelector);
+            });
+        });
+    });
+
+</script>

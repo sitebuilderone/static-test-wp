@@ -1,0 +1,63 @@
+<div class="lc-editor-menubar">
+
+    <div class="code-tabber">
+        <a id="html-tab" class="active" href="#"> HTML</a>
+        <a id="css-tab" href="#">Global CSS</a>
+        <a id="js-tab" href="#">Global JS</a>
+    </div>
+
+    <div class="after-tabber-extras"> 
+        <a href="#" class="lc-editor-goto-parent-element only-for-html"> <span class="fa fa-level-up"></span> &nbsp;  Go to Parent</a>
+    </div>
+
+    <div class="lc-editor-menubar-draghandle"></div>
+
+    <div class="lc-editor-menubar-tools">
+        <span>
+            Transparency
+            <input type="checkbox" id="lc-editor-transparency" >
+                
+            &nbsp;&nbsp;&nbsp;
+        </span>
+        <span>
+            Tips & How tos: 
+            
+            <select id="lc-editor-tips">
+                <option value="" selected>Browse...</option>
+                <optgroup label="Editor">
+                    <option value="https://docs.livecanvas.com/keyboard-tricks/">Keyboard shortcuts</option> 
+                </optgroup>
+                <optgroup label="HTML">
+                    <option value="https://docs.livecanvas.com/the-livecanvas-html-structure/">The LiveCanvas HTML structure</option>
+                    <option value="https://docs.livecanvas.com/creating-editable-regions/">Creating editable regions</option>
+                    <option value="https://bootstrap.ninja/ninjabootstrap/#spacing">NinjaBootstrap Classes Documentation</option>  
+                </optgroup>
+                <optgroup label="Dynamic">
+                    <option value="https://docs.livecanvas.com/shortcodes/">Built-in Shortcodes</option>
+                    <option value="https://docs.loopsandlogic.com/dynamic-tags/">Tangible Templating (Loops and Logic) Tags</option>
+                    <option value="https://docs.livecanvas.com/dynamic-templating/">Legacy Dynamic Templating Shortcodes</option>
+                    <option value="https://docs.livecanvas.com/woocommerce-shortcodes/">WooCommerce Dynamic Templating Shortcodes</option>
+                </optgroup>
+            </select>
+            
+            &nbsp;&nbsp;&nbsp;
+        </span>
+
+        <span>
+            Theme: 
+            <select id="lc-editor-theme"><optgroup label="Bright"><option value="chrome">Chrome</option><option value="clouds">Clouds</option><option value="crimson_editor">Crimson Editor</option><option value="dawn">Dawn</option><option value="dreamweaver">Dreamweaver</option><option value="eclipse">Eclipse</option><option value="github">GitHub</option><option value="iplastic">IPlastic</option><option value="solarized_light">Solarized Light</option><option value="textmate">TextMate</option><option value="tomorrow">Tomorrow</option><option value="xcode">XCode</option><option value="kuroir">Kuroir</option><option value="katzenmilch">KatzenMilch</option><option value="sqlserver">SQL Server</option></optgroup><optgroup label="Dark"><option value="ambiance">Ambiance</option><option value="chaos">Chaos</option><option value="clouds_midnight">Clouds Midnight</option><option value="dracula">Dracula</option><option value="cobalt">Cobalt</option><option value="gruvbox">Gruvbox</option><option value="gob">Green on Black</option><option value="idle_fingers">idle Fingers</option><option value="kr_theme">krTheme</option><option value="merbivore">Merbivore</option><option value="merbivore_soft">Merbivore Soft</option><option value="mono_industrial">Mono Industrial</option><option value="monokai">Monokai</option><option value="pastel_on_dark">Pastel on dark</option><option value="solarized_dark">Solarized Dark</option><option value="terminal">Terminal</option><option value="tomorrow_night">Tomorrow Night</option><option value="tomorrow_night_blue">Tomorrow Night Blue</option><option value="tomorrow_night_bright">Tomorrow Night Bright</option><option value="tomorrow_night_eighties">Tomorrow Night 80s</option><option value="twilight">Twilight</option><option value="vibrant_ink">Vibrant Ink</option></optgroup></select>
+            &nbsp;&nbsp;&nbsp;
+        </span>
+        <span>Size: <input id="lc-editor-fontsize" type="number" value="13" min="9" max="24"> px &nbsp;&nbsp;&nbsp; </span>
+        <a href="#" class="lc-editor-side">Side <span class="fa fa-arrow-circle-left"></a>
+        <a href="#" class="lc-editor-maximize">Maximize <span class="fa fa-arrows-alt"></a>
+        <a href="#" class="lc-editor-close">Close <span class="fa fa-close"></span></a>
+    </div>
+</div>
+
+<div id="lc-html-editor"></div>
+
+<div id="lc-css-editor"></div>
+
+<div id="lc-js-editor"></div>
+
